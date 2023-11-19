@@ -1,6 +1,5 @@
 package ru.bstu.course.mashurov.bank.entity;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 public class CreditAccount {

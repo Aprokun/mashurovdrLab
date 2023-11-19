@@ -1,7 +1,5 @@
 package ru.bstu.course.mashurov.bank.entity;
 
-import java.util.Random;
-
 import static ru.bstu.course.mashurov.bank.Utils.random;
 
 public class Bank {

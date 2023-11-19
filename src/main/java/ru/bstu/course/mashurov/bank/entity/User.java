@@ -1,8 +1,6 @@
 package ru.bstu.course.mashurov.bank.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import static ru.bstu.course.mashurov.bank.Utils.random;
 

@@ -1,7 +1,5 @@
 package ru.bstu.course.mashurov.bank.entity;
 
-import java.util.Date;
-
 public class PaymentAccount {
 
     private Integer id;
