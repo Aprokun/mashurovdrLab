@@ -1,9 +1,9 @@
 package ru.bstu.course.mashurov.bank.entity.values;
 
-public class BankAtmStatusValues {
+public enum BankAtmStatusValues {
 
-    public static final String WORKING = "working";
-    public static final String NOT_WORKING = "not working";
-    public static final String NOT_ENOUGH_MONEY = "not enough money";
+    WORKING("working"), NOT_WORKING("not working"), NOT_ENOUGH_MONEY("not enough money");
 
+    BankAtmStatusValues(String value) {
+    }
 }

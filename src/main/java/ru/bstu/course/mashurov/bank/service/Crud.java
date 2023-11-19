@@ -4,7 +4,7 @@ public interface Crud<T> {
 
     T findOne(Integer id);
 
-    void create(T entity);
+    T create(T entity);
 
     void delete(T entity);
 

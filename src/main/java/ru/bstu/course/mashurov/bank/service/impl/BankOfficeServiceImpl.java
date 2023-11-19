@@ -10,8 +10,8 @@ public class BankOfficeServiceImpl implements BankOfficeService {
     }
 
     @Override
-    public void create(BankOffice entity) {
-
+    public BankOffice create(BankOffice entity) {
+        return entity;
     }
 
     @Override

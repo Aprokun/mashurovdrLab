@@ -10,8 +10,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void create(Employee entity) {
-
+    public Employee create(Employee entity) {
+        return entity;
     }
 
     @Override

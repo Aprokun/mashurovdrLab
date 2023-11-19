@@ -4,14 +4,15 @@ import ru.bstu.course.mashurov.bank.entity.Bank;
 import ru.bstu.course.mashurov.bank.service.BankService;
 
 public class BankServiceImpl implements BankService {
+
     @Override
     public Bank findOne(Integer id) {
         return null;
     }
 
     @Override
-    public void create(Bank entity) {
-
+    public Bank create(Bank entity) {
+        return entity;
     }
 
     @Override

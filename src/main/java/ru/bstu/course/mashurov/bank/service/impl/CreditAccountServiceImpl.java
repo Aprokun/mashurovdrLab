@@ -10,8 +10,8 @@ public class CreditAccountServiceImpl implements CreditAccountService {
     }
 
     @Override
-    public void create(CreditAccount entity) {
-
+    public CreditAccount create(CreditAccount entity) {
+        return entity;
     }
 
     @Override

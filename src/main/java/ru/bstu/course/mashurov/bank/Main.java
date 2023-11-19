@@ -4,47 +4,68 @@ import ru.bstu.course.mashurov.bank.entity.*;
 import ru.bstu.course.mashurov.bank.entity.values.BankAtmStatusValues;
 import ru.bstu.course.mashurov.bank.entity.values.BankOfficeStatusValues;
 import ru.bstu.course.mashurov.bank.entity.values.EmployeePostValues;
+import ru.bstu.course.mashurov.bank.service.*;
+import ru.bstu.course.mashurov.bank.service.impl.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Bank bank = new Bank(1, "Bebra bank");
+        BankService bankService = new BankServiceImpl();
+        Bank bank = bankService.create(new Bank("Sbebra bank"));
+        System.out.println(bank);
 
-        BankAtm bankAtm = new BankAtm(
-                1, "atm", "address1", BankAtmStatusValues.WORKING,
-                "hall", "Ivanov Ivan Ivanovich", true, true,
-                bank.getTotalMoney(), 20000
-        );
+        BankOfficeService bankOfficeService = new BankOfficeServiceImpl();
+        BankOffice bankOffice = bankOfficeService.create(new BankOffice(
+                "Sbebra Bank Office",
+                "Free City of Braavos",
+                bank,
+                true,
+                true,
+                0,
+                true,
+                true,
+                true,
+                bank.getTotalMoney(),
+                new BigDecimal("700")));
+        System.out.println(bankOffice);
 
-        BankOffice bankOffice = new BankOffice(
-                1, "bebra bank office", "address2", BankOfficeStatusValues.WORKING, true,
-                0, true, true, true, bank.getTotalMoney(), 300000
-        );
+        EmployeeService employeeService = new EmployeeServiceImpl();
+        Employee employee = employeeService
+                .create(new Employee("Tycho Nestoris", LocalDate.of(270, 2, 21), EmployeePostValues.OFFICE_EMPLOYEE, bank, true,
+                        bankOffice, true, new BigDecimal("10")));
+        System.out.println(employee);
 
-        Employee employee = new Employee(
-                1, "Petrov Petr Petrovich", new Date(), EmployeePostValues.DIRECTOR, bank, false, bankOffice, false, 300000
-        );
+        AtmService atmService = new AtmServiceImpl();
+        BankAtm bankAtm = atmService.create(new BankAtm("First ATM of Braavos", bankOffice.getAddress(), BankAtmStatusValues.WORKING, bank,
+                bankOffice, employee, true, true, new BigDecimal("0"), new BigDecimal("25")));
+        System.out.println(bankAtm);
 
-        User user = new User(
-                1, "Ya Polzovatel Banka", new Date(), "Some workplace", 30000
-        );
+        ClientService userService = new ClientServiceImpl();
+        Client user = userService
+                .create(
+                        new Client(
+                                "Stannis Baratheon", LocalDate.of(264, 2, 15),
+                                "Dragon Stone", new BigDecimal("1000"), bank, new BigDecimal("999999999")
+                        )
+                );
+        System.out.println(user);
 
-        PaymentAccount paymentAccount = new PaymentAccount(1, user, bank.getName());
+        PaymentAccountService paymentAccountService = new PaymentAccountServiceImpl();
+        PaymentAccount paymentAccount = paymentAccountService
+                .create(new PaymentAccount(user, bank, new BigDecimal("9000")));
+        System.out.println(paymentAccount);
 
-        CreditAccount creditAccount = new CreditAccount(
-                1, user, bank.getName(), new Date(1637324288), new Date(1700396288), 24,
-                3000000, 30000, bank.getPercentage(), employee, paymentAccount
-        );
+        CreditAccountService creditAccountService = new CreditAccountServiceImpl();
+        CreditAccount creditAccount = creditAccountService.create(new CreditAccount(user, bank,
+                LocalDate.of(298, 1, 1), LocalDate.of(302, 1, 1), 48, new BigDecimal("29000"),
+                new BigDecimal("29000"),
+                new BigDecimal("100"), new BigDecimal("2"), employee, paymentAccount));
 
-        System.out.println("Bank - " + bank);
-        System.out.println("Bank office - " + bankOffice);
-        System.out.println("Bank atm - " + bankAtm);
-        System.out.println("Employee - " + employee);
-        System.out.println("User - " + user);
-        System.out.println("Payment account - " + paymentAccount);
-        System.out.println("Credit account - " + creditAccount);
+        System.out.println(creditAccount);
     }
 }

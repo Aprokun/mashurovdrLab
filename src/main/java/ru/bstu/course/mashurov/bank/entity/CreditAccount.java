@@ -1,123 +1,144 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.UUID;
 
-public class CreditAccount {
+public class CreditAccount extends Account {
 
-    private Integer id;
-
-    private User user;
-
-    private String bankName;
-
-    private Date startDate;
-
-    private Date endDate;
-
-    private Integer monthOfCreditCount;
-
-    private Integer creditSum;
-
-    private Integer monthlyPay;
-
-    private Double percentage;
-
+    private LocalDate dateStart;
+    private LocalDate dateEnd;
+    private int monthCount;
+    private BigDecimal creditAmount;
+    private BigDecimal remainingCreditAmount;
+    private BigDecimal montlyPayment;
+    private BigDecimal interestRate;
     private Employee employee;
-
     private PaymentAccount paymentAccount;
 
-    public CreditAccount(
-            Integer id, User user, String bankName, Date startDate, Date endDate, Integer monthOfCreditCount,
-            Integer creditSum, Integer monthlyPay, Double percentage, Employee employee, PaymentAccount paymentAccount
-    ) {
+    public CreditAccount() {
+        super();
+        initWithDefaults();
+    }
 
-        this.id = id;
-        this.user = user;
-        this.bankName = bankName;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.monthOfCreditCount = monthOfCreditCount;
-        this.creditSum = creditSum;
-        this.monthlyPay = monthlyPay;
-        this.percentage = percentage;
+    public CreditAccount(CreditAccount creditAccount) {
+        super(creditAccount.id, creditAccount.client, creditAccount.bank);
+        this.dateStart = creditAccount.dateStart;
+        this.dateEnd = creditAccount.dateEnd;
+        this.monthCount = creditAccount.monthCount;
+        this.creditAmount = creditAccount.creditAmount;
+        this.remainingCreditAmount = creditAccount.remainingCreditAmount;
+        this.montlyPayment = creditAccount.montlyPayment;
+        this.interestRate = creditAccount.interestRate;
+        this.employee = new Employee(creditAccount.employee);
+        this.paymentAccount = new PaymentAccount(creditAccount.paymentAccount);
+    }
+
+    public CreditAccount(Client client, Bank bank, LocalDate dateStart, LocalDate dateEnd, int monthCount,
+                         BigDecimal creditAmount, BigDecimal remainingCreditAmount, BigDecimal montlyPayment,
+                         BigDecimal interestRate, Employee employee, PaymentAccount paymentAccount) {
+        super(client, bank);
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
+        this.monthCount = monthCount;
+        this.creditAmount = creditAmount;
+        this.remainingCreditAmount = remainingCreditAmount;
+        this.montlyPayment = montlyPayment;
+        this.interestRate = interestRate;
         this.employee = employee;
         this.paymentAccount = paymentAccount;
     }
 
-    public Integer getId() {
-        return id;
+    public CreditAccount(UUID id, Client client, Bank bank, LocalDate dateStart, LocalDate dateEnd, int monthCount,
+                         BigDecimal creditAmount, BigDecimal remainingCreditAmount, BigDecimal montlyPayment,
+                         BigDecimal interestRate, Employee employee, PaymentAccount paymentAccount) {
+        super(id, client, bank);
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
+        this.monthCount = monthCount;
+        this.creditAmount = creditAmount;
+        this.remainingCreditAmount = remainingCreditAmount;
+        this.montlyPayment = montlyPayment;
+        this.interestRate = interestRate;
+        this.employee = employee;
+        this.paymentAccount = paymentAccount;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return "CreditAccount:{" +
+                "\n account='" + super.toString() + "'" +
+                ",\n dateStart='" + getDateStart() + "'" +
+                ",\n dateEnd='" + getDateEnd() + "'" +
+                ",\n monthCount='" + getMonthCount() + "'" +
+                ",\n creditAmount='" + String.format("%.2f", getCreditAmount()) + "'" +
+                ",\n remainingCreditAmount='" + String.format("%.2f", getRemainingCreditAmount()) + "'" +
+                ",\n montlyPayment='" + String.format("%.2f", getMonthlyPayment()) + "'" +
+                ",\n interestRate='" + String.format("%.2f", getInterestRate()) + "'" +
+                ",\n employee='" + getEmployee() + "'" +
+                ",\n paymentAccount='" + getPaymentAccount() + "'" +
+                "\n}";
     }
 
-    public User getUser() {
-        return user;
+    public LocalDate getDateStart() {
+        return this.dateStart;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setDateStart(LocalDate dateStart) {
+        this.dateStart = dateStart;
     }
 
-    public String getBankName() {
-        return bankName;
+    public LocalDate getDateEnd() {
+        return this.dateEnd;
     }
 
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
+    public void setDateEnd(LocalDate dateEnd) {
+        this.dateEnd = dateEnd;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public int getMonthCount() {
+        return this.monthCount;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setMonthCount(int monthCount) {
+        this.monthCount = monthCount;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public BigDecimal getCreditAmount() {
+        return this.creditAmount;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setCreditAmount(BigDecimal creditAmount) {
+        this.creditAmount = creditAmount;
     }
 
-    public Integer getMonthOfCreditCount() {
-        return monthOfCreditCount;
+    public BigDecimal getRemainingCreditAmount() {
+        return this.remainingCreditAmount;
     }
 
-    public void setMonthOfCreditCount(Integer monthOfCreditCount) {
-        this.monthOfCreditCount = monthOfCreditCount;
+    public void setRemainingCreditAmount(BigDecimal remainingCreditAmount) {
+        this.remainingCreditAmount = remainingCreditAmount;
     }
 
-    public Integer getCreditSum() {
-        return creditSum;
+    public BigDecimal getMonthlyPayment() {
+        return this.montlyPayment;
     }
 
-    public void setCreditSum(Integer creditSum) {
-        this.creditSum = creditSum;
+    public void setMontlyPayment(BigDecimal montlyPayment) {
+        this.montlyPayment = montlyPayment;
     }
 
-    public Integer getMonthlyPay() {
-        return monthlyPay;
+    public BigDecimal getInterestRate() {
+        return this.interestRate;
     }
 
-    public void setMonthlyPay(Integer monthlyPay) {
-        this.monthlyPay = monthlyPay;
-    }
-
-    public Double getPercentage() {
-        return percentage;
-    }
-
-    public void setPercentage(Double percentage) {
-        this.percentage = percentage;
+    public void setInterestRate(BigDecimal interestRate) {
+        this.interestRate = interestRate;
     }
 
     public Employee getEmployee() {
-        return employee;
+        return this.employee;
     }
 
     public void setEmployee(Employee employee) {
@@ -125,27 +146,22 @@ public class CreditAccount {
     }
 
     public PaymentAccount getPaymentAccount() {
-        return paymentAccount;
+        return this.paymentAccount;
     }
 
     public void setPaymentAccount(PaymentAccount paymentAccount) {
         this.paymentAccount = paymentAccount;
     }
 
-    @Override
-    public String toString() {
-        return "CreditAccount{" +
-                "id=" + id +
-                ", user=" + user +
-                ", bankName='" + bankName + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", monthOfCreditCount=" + monthOfCreditCount +
-                ", creditSum=" + creditSum +
-                ", monthlyPay=" + monthlyPay +
-                ", percentage=" + percentage +
-                ", employee=" + employee +
-                ", paymentAccount=" + paymentAccount +
-                '}';
+    private void initWithDefaults() {
+        dateStart = null;
+        dateEnd = null;
+        monthCount = 0;
+        creditAmount = new BigDecimal("0");
+        remainingCreditAmount = new BigDecimal("0");
+        montlyPayment = new BigDecimal("0");
+        interestRate = new BigDecimal("0");
+        employee = null;
+        paymentAccount = null;
     }
 }

@@ -1,127 +1,121 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import ru.bstu.course.mashurov.bank.entity.values.EmployeePostValues;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
-public class Employee {
+public class Employee extends Person {
 
-    private Integer id;
-
-    private String fullName;
-
-    private Date birthDate;
-
-    private String post;
-
+    private EmployeePostValues job;
     private Bank bank;
-
-    private boolean isRemoteWorking;
-
+    private boolean isWorkingFromHome;
     private BankOffice bankOffice;
+    private boolean isCreditAvailable;
+    private BigDecimal salary;
 
-    private boolean isCanIssueLoan;
+    public Employee() {
+        super();
+        initWithDefaults();
+    }
 
-    private Integer salary;
+    public Employee(Employee employee) {
+        super(employee.id, employee.name, employee.birthDate);
+        this.job = employee.job;
+        this.bank = new Bank(employee.bank);
+        this.isWorkingFromHome = employee.isWorkingFromHome;
+        this.bankOffice = new BankOffice(employee.bankOffice);
+        this.isCreditAvailable = employee.isCreditAvailable;
+        this.salary = employee.salary;
+    }
 
-    public Employee(
-            Integer id, String fullName, Date birthDate, String post, Bank bank, boolean isRemoteWorking,
-            BankOffice bankOffice, boolean isCanIssueLoan, Integer salary
-    ) {
-
-        this.id = id;
-        this.fullName = fullName;
-        this.birthDate = birthDate;
-        this.post = post;
+    public Employee(String name, LocalDate birthDate, EmployeePostValues job, Bank bank, boolean isWorkingFromHome,
+                    BankOffice bankOffice, boolean isCreditAvailable, BigDecimal salary) {
+        super(name, birthDate);
+        this.job = job;
         this.bank = bank;
-        this.isRemoteWorking = isRemoteWorking;
+        this.isWorkingFromHome = isWorkingFromHome;
         this.bankOffice = bankOffice;
-        this.isCanIssueLoan = isCanIssueLoan;
+        this.isCreditAvailable = isCreditAvailable;
         this.salary = salary;
     }
 
-    public Integer getId() {
-        return id;
+    @Override
+    public String toString() {
+        return "Employee:{" +
+                "\n person='" + super.toString() + "'" +
+                ",\n job='" + getJob() + "'" +
+                ",\n bank='" + getBank() + "'" +
+                ",\n isWorkingFromHome='" + isIsWorkingFromHome() + "'" +
+                ",\n bankOffice='" + getBankOffice() + "'" +
+                ",\n isCreditAvailable='" + isIsCreditAvailable() + "'" +
+                ",\n salary='" + String.format("%.2f", getSalary()) + "'" +
+                "\n}";
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public EmployeePostValues getJob() {
+        return this.job;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getPost() {
-        return post;
-    }
-
-    public void setPost(String post) {
-        this.post = post;
+    public void setJob(EmployeePostValues job) {
+        this.job = job;
     }
 
     public Bank getBank() {
-        return bank;
+        return this.bank;
     }
 
     public void setBank(Bank bank) {
         this.bank = bank;
     }
 
-    public boolean isRemoteWorking() {
-        return isRemoteWorking;
+    public boolean isIsWorkingFromHome() {
+        return this.isWorkingFromHome;
     }
 
-    public void setRemoteWorking(boolean remoteWorking) {
-        isRemoteWorking = remoteWorking;
+    public boolean getIsWorkingFromHome() {
+        return this.isWorkingFromHome;
+    }
+
+    public void setIsWorkingFromHome(boolean isWorkingFromHome) {
+        this.isWorkingFromHome = isWorkingFromHome;
     }
 
     public BankOffice getBankOffice() {
-        return bankOffice;
+        return this.bankOffice;
     }
 
     public void setBankOffice(BankOffice bankOffice) {
         this.bankOffice = bankOffice;
     }
 
-    public boolean isCanIssueLoan() {
-        return isCanIssueLoan;
+    public boolean isIsCreditAvailable() {
+        return this.isCreditAvailable;
     }
 
-    public void setCanIssueLoan(boolean canIssueLoan) {
-        isCanIssueLoan = canIssueLoan;
+    public boolean getIsCreditAvailable() {
+        return this.isCreditAvailable;
     }
 
-    public Integer getSalary() {
-        return salary;
+    public void setIsCreditAvailable(boolean isCreditAvailable) {
+        this.isCreditAvailable = isCreditAvailable;
     }
 
-    public void setSalary(Integer salary) {
+    public BigDecimal getSalary() {
+        return this.salary;
+    }
+
+    public void setSalary(BigDecimal salary) {
         this.salary = salary;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", birthDate=" + birthDate +
-                ", post='" + post + '\'' +
-                ", bank=" + bank +
-                ", isRemoteWorking=" + isRemoteWorking +
-                ", bankOffice=" + bankOffice +
-                ", isCanIssueLoan=" + isCanIssueLoan +
-                ", salary=" + salary +
-                '}';
+    private void initWithDefaults() {
+        job = null;
+        bank = null;
+        isWorkingFromHome = false;
+        bankOffice = null;
+        isCreditAvailable = false;
+        salary = new BigDecimal("0");
     }
 }

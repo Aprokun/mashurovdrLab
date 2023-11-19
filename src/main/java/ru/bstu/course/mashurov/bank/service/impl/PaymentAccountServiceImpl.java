@@ -10,8 +10,8 @@ public class PaymentAccountServiceImpl implements PaymentAccountService {
     }
 
     @Override
-    public void create(PaymentAccount entity) {
-
+    public PaymentAccount create(PaymentAccount entity) {
+        return entity;
     }
 
     @Override

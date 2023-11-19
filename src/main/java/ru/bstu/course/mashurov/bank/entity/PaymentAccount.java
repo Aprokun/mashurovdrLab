@@ -1,62 +1,49 @@
 package ru.bstu.course.mashurov.bank.entity;
 
-public class PaymentAccount {
+import java.math.BigDecimal;
+import java.util.UUID;
 
-    private Integer id;
+public class PaymentAccount extends Account {
+    private BigDecimal balance;
 
-    private User user;
-
-    private String bankName;
-
-    private Integer sum;
-
-    public PaymentAccount(Integer id, User user, String bankName) {
-
-        this.id = id;
-        this.user = user;
-        this.bankName = bankName;
-        this.sum = 0;
+    public PaymentAccount() {
+        super();
+        initWithDefaults();
     }
 
-    public Integer getId() {
-        return id;
+    public PaymentAccount(PaymentAccount paymentAccount) {
+        super(paymentAccount.id, paymentAccount.client, paymentAccount.bank);
+        this.balance = paymentAccount.balance;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public PaymentAccount(Client client, Bank bank, BigDecimal balance) {
+        super(client, bank);
+        this.balance = balance;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getBankName() {
-        return bankName;
-    }
-
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
-    }
-
-    public Integer getSum() {
-        return sum;
-    }
-
-    public void setSum(Integer sum) {
-        this.sum = sum;
+    public PaymentAccount(UUID id, Client client, Bank bank, BigDecimal balance) {
+        super(id, client, bank);
+        this.balance = balance;
     }
 
     @Override
     public String toString() {
-        return "PaymentAccount{" +
-                "id=" + id +
-                ", user=" + user +
-                ", bankName='" + bankName + '\'' +
-                ", sum=" + sum +
-                '}';
+        return "PaymentAccount:{" +
+                "\n account='" + super.toString() + "'" +
+                ",\n balance='" + String.format("%.2f", getBalance()) + "'" +
+                "\n}";
     }
+
+    public BigDecimal getBalance() {
+        return this.balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+
+    private void initWithDefaults() {
+        balance = new BigDecimal("0");
+    }
+
 }

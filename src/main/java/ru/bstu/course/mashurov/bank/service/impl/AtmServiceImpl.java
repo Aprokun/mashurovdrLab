@@ -11,8 +11,8 @@ public class AtmServiceImpl implements AtmService {
     }
 
     @Override
-    public void create(BankAtm entity) {
-
+    public BankAtm create(BankAtm entity) {
+        return entity;
     }
 
     @Override

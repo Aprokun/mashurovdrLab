@@ -1,124 +1,148 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import java.math.BigDecimal;
+import java.util.UUID;
+
 import static ru.bstu.course.mashurov.bank.Utils.random;
 
 public class Bank {
 
-    private Integer id;
-
+    public static final BigDecimal MAX_RATING = new BigDecimal("100");
+    public static final BigDecimal MAX_TOTAL_MONEY = new BigDecimal("1000000");
+    public static final BigDecimal MAX_INTEREST_RATE = new BigDecimal("20");
+    private UUID id;
     private String name;
+    private int officeCount;
+    private int atmCount;
+    private int employeeCount;
+    private int clientCount;
+    private byte rating;
+    private BigDecimal totalMoney;
+    private BigDecimal interestRate;
 
-    private Integer officeCount = 0;
+    public Bank() {
+        initWithDefaults();
+    }
 
-    private Integer atmCount = 0;
+    public Bank(Bank bank) {
+        this.id = UUID.fromString(bank.id.toString());
+        this.name = bank.name;
+        this.officeCount = bank.officeCount;
+        this.atmCount = bank.atmCount;
+        this.employeeCount = bank.employeeCount;
+        this.clientCount = bank.clientCount;
+        this.rating = bank.rating;
+        this.totalMoney = bank.totalMoney;
+        this.interestRate = bank.interestRate;
+    }
 
-    private Integer employeeCount = 0;
+    public Bank(String name) {
+        initWithDefaults();
+        this.name = name;
+    }
 
-    private Integer clientCount = 0;
-
-    private Integer rating;
-
-    private Long totalMoney;
-
-    private Double percentage;
-
-    public Bank(Integer id, String name) {
-
+    public Bank(UUID id, String name) {
+        initWithDefaults();
         this.id = id;
         this.name = name;
-        this.officeCount = 0;
-        this.atmCount = 0;
-        this.employeeCount = 0;
-        this.clientCount = 0;
-        this.rating = random.nextInt(101);
-        this.totalMoney = random.nextLong(1000001);
-        this.percentage = random.nextDouble() * 20;
     }
 
-    public Integer getId() {
-        return id;
+    @Override
+    public String toString() {
+        return "Bank:{" +
+                "\n id='" + getId() + "'" +
+                ",\n name='" + getName() + "'" +
+                ",\n officeCount='" + getOfficeCount() + "'" +
+                ",\n atmCount='" + getAtmCount() + "'" +
+                ",\n employeeCount='" + getEmployeeCount() + "'" +
+                ",\n clientCount='" + getClientCount() + "'" +
+                ",\n rating='" + getRating() + "'" +
+                ",\n totalMoney='" + String.format("%.2f", getTotalMoney()) + "'" +
+                ",\n interestRate='" + String.format("%.2f", getInterestRate()) + "'" +
+                "\n}";
     }
 
-    public void setId(Integer id) {
+    public UUID getId() {
+        return this.id;
+    }
+
+    public void setId(UUID id) {
         this.id = id;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public Integer getOfficeCount() {
-        return officeCount;
+    public int getOfficeCount() {
+        return this.officeCount;
     }
 
-    public void setOfficeCount(Integer officeCount) {
+    public void setOfficeCount(int officeCount) {
         this.officeCount = officeCount;
     }
 
-    public Integer getAtmCount() {
-        return atmCount;
+    public int getAtmCount() {
+        return this.atmCount;
     }
 
-    public void setAtmCount(Integer atmCount) {
+    public void setAtmCount(int atmCount) {
         this.atmCount = atmCount;
     }
 
-    public Integer getEmployeeCount() {
-        return employeeCount;
+    public int getEmployeeCount() {
+        return this.employeeCount;
     }
 
-    public void setEmployeeCount(Integer employeeCount) {
+    public void setEmployeeCount(int employeeCount) {
         this.employeeCount = employeeCount;
     }
 
-    public Integer getClientCount() {
-        return clientCount;
+    public int getClientCount() {
+        return this.clientCount;
     }
 
-    public void setClientCount(Integer clientCount) {
+    public void setClientCount(int clientCount) {
         this.clientCount = clientCount;
     }
 
-    public Integer getRating() {
-        return rating;
+    public byte getRating() {
+        return this.rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(byte rating) {
         this.rating = rating;
     }
 
-    public Long getTotalMoney() {
-        return totalMoney;
+    public BigDecimal getTotalMoney() {
+        return this.totalMoney;
     }
 
-    public void setTotalMoney(Long totalMoney) {
+    public void setTotalMoney(BigDecimal totalMoney) {
         this.totalMoney = totalMoney;
     }
 
-    public Double getPercentage() {
-        return percentage;
+    public BigDecimal getInterestRate() {
+        return this.interestRate;
     }
 
-    public void setPercentage(Double percentage) {
-        this.percentage = percentage;
+    public void setInterestRate(BigDecimal interestRate) {
+        this.interestRate = interestRate;
     }
 
-    @Override
-    public String toString() {
-        return "Bank{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", officeCount=" + officeCount +
-                ", atmCount=" + atmCount +
-                ", employeeCount=" + employeeCount +
-                ", clientCount=" + clientCount +
-                ", rating=" + rating +
-                ", totalMoney=" + totalMoney +
-                ", percentage=" + percentage +
-                '}';
+    private void initWithDefaults() {
+        id = UUID.randomUUID();
+        name = "No name";
+        officeCount = 0;
+        atmCount = 0;
+        employeeCount = 0;
+        clientCount = 0;
+        rating = 0;
+        totalMoney = new BigDecimal("0");
+        interestRate = new BigDecimal("0");
     }
 }

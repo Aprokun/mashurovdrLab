@@ -1,10 +1,15 @@
 package ru.bstu.course.mashurov.bank.entity.values;
 
-public class EmployeePostValues {
+public enum EmployeePostValues {
+    DIRECTOR("director"), OPERATOR("operator"), OFFICE_EMPLOYEE("office employee");
 
-    public static final String DIRECTOR = "director";
+    private final String value;
 
-    public static final String OPERATOR = "operator";
+    EmployeePostValues(String value) {
+        this.value = value;
+    }
 
-    public static final String OFFICE_EMPLOYEE = "office employee";
+    public String getValue() {
+        return value;
+    }
 }
