@@ -38,13 +38,16 @@ public class BankAtm {
     }
 
     public BankAtm() {
+
         initId();
         initWithDefaults();
     }
 
     public BankAtm(String name, String address) {
+
         initId();
         initWithDefaults();
+
         this.name = name;
         this.address = address;
     }
@@ -54,8 +57,10 @@ public class BankAtm {
         Employee employee, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable, BigDecimal totalMoney,
         BigDecimal maintenanceCost
     ) {
+
         initId();
         initWithDefaults();
+
         this.name = name;
         this.address = address;
         this.status = status;
@@ -73,6 +78,7 @@ public class BankAtm {
         Employee employee, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable, BigDecimal totalMoney,
         BigDecimal maintenanceCost
     ) {
+
         this.id = id;
         this.name = name;
         this.address = address;
@@ -88,19 +94,27 @@ public class BankAtm {
 
     @Override
     public String toString() {
-        return "BankAtm:{" +
-                "\n id='" + getId() + "'" +
-                ",\n name='" + getName() + "'" +
-                ",\n address='" + getAddress() + "'" +
-                ",\n status='" + getStatus() + "'" +
-                ",\n bank='" + getBank().getName() + "'" +
-                ",\n bankOffice='" + getBankOffice() + "'" +
-                ",\n employee='" + getEmployee() + "'" +
-                ",\n isCashWithdrawalAvailable='" + isIsCashWithdrawalAvailable() + "'" +
-                ",\n isCashDepositAvailable='" + isIsCashDepositAvailable() + "'" +
-                ",\n totalMoney='" + String.format("%.2f", getTotalMoney()) + "'" +
-                ",\n maintenanceCost='" + String.format("%.2f", getMaintenanceCost()) + "'" +
-                "\n}";
+
+        return """
+            BankAtm:{
+                id='%s',
+                name='%s',
+                address='%s',
+                status='%s',
+                bank='%s',
+                bankOffice='%s',
+                employee='%s',
+                isCashWithdrawalAvailable='%s',
+                isCashDepositAvailable='%s',
+                totalMoney='%.2f',
+                maintenanceCost='%.2f'
+            }
+            """
+            .formatted(
+                getId(), getName(), getAddress(), getStatus(), getBank().getName(), getBankOffice(),
+                getEmployee(), isIsCashWithdrawalAvailable(), isIsCashDepositAvailable(), getTotalMoney(),
+                getMaintenanceCost()
+            );
     }
 
     public int getId() {
@@ -200,6 +214,7 @@ public class BankAtm {
     }
 
     private void initWithDefaults() {
+
         name = "No name";
         address = "No address";
         status = BankAtmStatusValues.NOT_WORKING;

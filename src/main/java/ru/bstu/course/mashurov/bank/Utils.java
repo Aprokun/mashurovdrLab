@@ -46,8 +46,10 @@ public class Utils {
     }
 
     public static BigDecimal nextBigDecimal(int scale, Random r) {
+
         BigInteger bi = nextBigInteger(scale, r); // generate random BigInteger with a number of digits equal to scale.
         BigDecimal bd = new BigDecimal(bi); // convert BigInteger to a BigDecimal
+
         return bd.movePointLeft(bd.precision()); // move the decimal point all the way to the left
     }
 
@@ -59,11 +61,7 @@ public class Utils {
         return between(min, MAX, random);
     }
 
-    public static BigDecimal between(BigDecimal min, BigDecimal MAX, Random r) {
-        return min.add(
-            nextBigDecimal(
-                MAX.subtract(min),
-                Math.max(min.precision(), MAX.precision()),
-                r));
+    public static BigDecimal between(BigDecimal min, BigDecimal MAX, Random random) {
+        return min.add(nextBigDecimal(MAX.subtract(min), Math.max(min.precision(), MAX.precision()), random));
     }
 }

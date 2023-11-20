@@ -69,6 +69,7 @@ public class CreditAccountServiceImpl implements CreditAccountService {
         final BigDecimal paymentAccountBalance = creditAccount.getPaymentAccount().getBalance();
 
         if (paymentAccountBalance.compareTo(monthlyPayment) < 0) {
+
             System.err.println("Error: CreditAccount - not enough balance for monthly payment");
             return false;
         }

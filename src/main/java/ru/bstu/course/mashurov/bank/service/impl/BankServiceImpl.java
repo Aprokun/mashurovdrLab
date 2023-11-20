@@ -2,6 +2,7 @@ package ru.bstu.course.mashurov.bank.service.impl;
 
 import ru.bstu.course.mashurov.bank.Utils;
 import ru.bstu.course.mashurov.bank.entity.*;
+import ru.bstu.course.mashurov.bank.entity.values.Constants;
 import ru.bstu.course.mashurov.bank.validator.BankValidator;
 import ru.bstu.course.mashurov.bank.service.BankOfficeService;
 import ru.bstu.course.mashurov.bank.service.BankService;
@@ -48,9 +49,9 @@ public class BankServiceImpl implements BankService {
 
         final Random random = new Random();
 
-        newBank.setRating((byte) random.nextInt(Bank.MAX_RATING.intValue() + 1));
+        newBank.setRating((byte) random.nextInt(Constants.MAX_RATING.intValue() + 1));
         newBank.setTotalMoney(
-                Utils.between(new BigDecimal("0.0"), new BigDecimal("1.0").multiply(Bank.MAX_TOTAL_MONEY))
+                Utils.between(new BigDecimal("0.0"), new BigDecimal("1.0").multiply(Constants.MAX_TOTAL_MONEY))
         );
 
         calculateInterestRate(newBank);
@@ -92,37 +93,6 @@ public class BankServiceImpl implements BankService {
         }
 
         return new ArrayList<>();
-    }
-
-    @Override
-    public void printBankData(int bankId) {
-
-        Bank bank = findById(bankId);
-
-        if (bank == null) {
-            return;
-        }
-
-        System.out.println("=====================");
-        System.out.println(bank);
-
-        List<BankOffice> offices = officesByBankId.get(bankId);
-
-        if (offices != null) {
-            System.out.println("Offices:");
-            offices.forEach((BankOffice office) -> bankOfficeService.printBankOfficeData(office.getId()));
-        }
-
-        List<Client> clients = clientsByBankId.get(bankId);
-
-        if (clients != null) {
-            System.out.println("Clients:");
-            clients.forEach((Client client) -> {
-                clientService.printClientData(client.getId(), false);
-            });
-        }
-
-        System.out.println("=====================");
     }
 
     @Override
@@ -247,9 +217,9 @@ public class BankServiceImpl implements BankService {
 
             final BigDecimal centralBankInterestRate = Utils
                     .between(new BigDecimal("0.0"), new BigDecimal("1.0"))
-                    .multiply(Bank.MAX_INTEREST_RATE);
+                    .multiply(Constants.MAX_INTEREST_RATE);
 
-            final BigDecimal maxBankInterestRateMargin = Bank.MAX_INTEREST_RATE.subtract(centralBankInterestRate);
+            final BigDecimal maxBankInterestRateMargin = Constants.MAX_INTEREST_RATE.subtract(centralBankInterestRate);
 
             final BigDecimal bankInterestRateMargin = (Utils.between(new BigDecimal("0.0"), new BigDecimal("1.0"))
                     .multiply(maxBankInterestRateMargin))
@@ -291,5 +261,36 @@ public class BankServiceImpl implements BankService {
     @Override
     public boolean approveCredit(Bank bank, CreditAccount account, Employee employee) {
         return false;
+    }
+
+    @Override
+    public void printData(final Integer bankId) {
+
+        Bank bank = findById(bankId);
+
+        if (bank == null) {
+            return;
+        }
+
+        System.out.println("=====================");
+        System.out.println(bank);
+
+        List<BankOffice> offices = officesByBankId.get(bankId);
+
+        if (offices != null) {
+
+            System.out.println("Offices:");
+            offices.forEach((BankOffice office) -> bankOfficeService.printData(office.getId()));
+        }
+
+        List<Client> clients = clientsByBankId.get(bankId);
+
+        if (clients != null) {
+
+            System.out.println("Clients:");
+            clients.forEach((Client client) -> clientService.printClientData(client.getId(), false));
+        }
+
+        System.out.println("=====================");
     }
 }

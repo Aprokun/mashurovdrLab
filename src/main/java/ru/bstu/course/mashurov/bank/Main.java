@@ -31,15 +31,72 @@ public class Main {
         PaymentAccountService paymentAccountService = new PaymentAccountServiceImpl(clientService);
         CreditAccountService creditAccountService = new CreditAccountServiceImpl(clientService);
 
-        // Создадим банки
+        createBanks(bankService);
+
+        List<Bank> banks = bankService.fetchAll();
+        createBankOffices(banks, bankOfficeService);
+
+        List<BankOffice> offices = bankOfficeService.fetchAll();
+        createOfficeEmployees(offices, employeeService, random);
+
+        createOfficesAtms(offices, atmService, bankOfficeService, random);
+
+        createBankClients(banks, clientService, random);
+
+        List<Client> clients = clientService.fetchAll();
+        createClientPaymentAccounts(clients, paymentAccountService, random);
+
+        createClientCreditAccounts(
+            clients, bankService, random, bankOfficeService, clientService, creditAccountService
+        );
+
+        handleUserAction(scanner, bankService, clientService);
+
+        scanner.close();
+    }
+
+    private static void handleUserAction(Scanner scanner, BankService bankService, ClientService clientService) {
+
+        while (true) {
+
+            System.out.println("\nPick an action: ");
+            System.out.println("1 - check bank data by bank id");
+            System.out.println("2 - check client data by client id");
+            System.out.println("3 - quit program");
+
+            String action = scanner.nextLine();
+
+            switch (action) {
+
+                case "1":
+                    handleCheckBankData(bankService, scanner);
+                    break;
+
+                case "2":
+                    handleCheckClientData(clientService, scanner);
+                    break;
+
+                case "3":
+                    return;
+
+                default:
+                    System.out.println("Error: unknown action. Please, try again");
+                    break;
+            }
+        }
+    }
+
+    private static void createBanks(BankService bankService) {
+
         bankService.create(new Bank("Sbebra Bank"));
         bankService.create(new Bank("Tinkonn"));
         bankService.create(new Bank("BTV"));
         bankService.create(new Bank("Beta bank"));
         bankService.create(new Bank("Dimalegenda bank"));
+    }
 
-        // Создание офисов в каждом банке
-        List<Bank> banks = bankService.fetchAll();
+    private static void createBankOffices(List<Bank> banks, BankOfficeService bankOfficeService) {
+
         for (Bank bank : banks) {
             for (int i = 1; i <= 3; i++) {
                 bankOfficeService.create(
@@ -51,9 +108,10 @@ public class Main {
                 );
             }
         }
+    }
 
-        // Добавление сотрудников в каждый офис
-        List<BankOffice> offices = bankOfficeService.fetchAll();
+    private static void createOfficeEmployees(List<BankOffice> offices, EmployeeService employeeService, Random random) {
+
         for (BankOffice office : offices) {
             for (int i = 1; i <= 5; i++) {
                 employeeService.create(
@@ -65,8 +123,10 @@ public class Main {
                 );
             }
         }
+    }
 
-        // Добавление банкоматов в каждый офис
+    private static void createOfficesAtms(List<BankOffice> offices, AtmService atmService, BankOfficeService bankOfficeService, Random random) {
+
         for (BankOffice office : offices) {
             for (int i = 1; i <= 3; i++) {
                 atmService.create(
@@ -78,8 +138,10 @@ public class Main {
                 );
             }
         }
+    }
 
-        // Добавление клиентов в каждый банк
+    private static void createBankClients(List<Bank> banks, ClientService clientService, Random random) {
+
         for (Bank bank : banks) {
             for (int i = 1; i <= 5; i++) {
                 clientService.create(
@@ -92,9 +154,10 @@ public class Main {
                 );
             }
         }
+    }
 
-        // Добавление платежных счетов каждому клиенту
-        List<Client> clients = clientService.fetchAll();
+    private static void createClientPaymentAccounts(List<Client> clients, PaymentAccountService paymentAccountService, Random random) {
+
         for (Client client : clients) {
             for (int i = 1; i <= 2; i++) {
                 paymentAccountService.create(
@@ -102,8 +165,10 @@ public class Main {
                 );
             }
         }
+    }
 
-        // Добавление кредитных счетов каждому клиенту
+    private static void createClientCreditAccounts(List<Client> clients, BankService bankService, Random random, BankOfficeService bankOfficeService, ClientService clientService, CreditAccountService creditAccountService) {
+
         for (Client client : clients) {
             for (int i = 1; i <= 2; i++) {
 
@@ -126,62 +191,35 @@ public class Main {
                 creditAccountService.create(creditAccount);
             }
         }
+    }
 
-        System.out.println("\nLab #2.");
+    private static void handleCheckClientData(ClientService clientService, Scanner scanner) {
 
-        label:
-        while (true) {
+        System.out.println("Number of clients in the system: " + clientService.fetchAll().size());
 
-            System.out.println("\nPick an action: ");
-            System.out.println("b - check bank data by bank id");
-            System.out.println("c - check client data by client id");
-            System.out.println("q - quit program");
-
-            String action = scanner.nextLine();
-
-            switch (action) {
-
-                case "b":
-
-                    System.out.println("Number of banks in the system: " + bankService.fetchAll().size());
-
-                    for (Bank bank : bankService.fetchAll()) {
-                        System.out.println("id: " + bank.getId() + " - " + bank.getName());
-                    }
-
-                    System.out.println("Enter bank id:");
-
-                    int bankIdToPrint = scanner.nextInt();
-                    scanner.nextLine();
-                    bankService.printBankData(bankIdToPrint);
-
-                    break;
-
-                case "c":
-
-                    System.out.println("Number of clients in the system: " + clientService.fetchAll().size());
-
-                    for (Client client : clientService.fetchAll()) {
-                        System.out.println("id: " + client.getId() + " - " + client.getName());
-                    }
-
-                    System.out.println("Enter client id:");
-
-                    int clientIdToPrint = scanner.nextInt();
-                    scanner.nextLine();
-                    clientService.printClientData(clientIdToPrint, true);
-
-                    break;
-
-                case "q":
-                    break label;
-
-                default:
-                    System.out.println("Error: unknown action. Please, try again");
-                    break;
-            }
+        for (Client client : clientService.fetchAll()) {
+            System.out.println("id: " + client.getId() + " - " + client.getName());
         }
 
-        scanner.close();
+        System.out.println("Enter client id:");
+
+        int clientIdToPrint = scanner.nextInt();
+        scanner.nextLine();
+        clientService.printClientData(clientIdToPrint, true);
+    }
+
+    private static void handleCheckBankData(BankService bankService, Scanner scanner) {
+
+        System.out.println("Number of banks in the system: " + bankService.fetchAll().size());
+
+        for (Bank bank : bankService.fetchAll()) {
+            System.out.println("id: " + bank.getId() + " - " + bank.getName());
+        }
+
+        System.out.println("Enter bank id:");
+
+        int bankIdToPrint = scanner.nextInt();
+        scanner.nextLine();
+        bankService.printData(bankIdToPrint);
     }
 }

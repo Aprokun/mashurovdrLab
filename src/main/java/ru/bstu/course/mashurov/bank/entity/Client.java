@@ -5,7 +5,6 @@ import java.time.LocalDate;
 
 public class Client extends Person {
 
-    public static final BigDecimal MAX_MONTHLY_INCOME = new BigDecimal("10000");
     private String workPlace;
     private BigDecimal monthlyIncome;
     private Bank bank;
@@ -26,8 +25,7 @@ public class Client extends Person {
     }
 
     public Client(
-        String name, LocalDate birthDate, String workPlace, BigDecimal monthlyIncome, Bank bank,
-        BigDecimal creditRating
+        String name, LocalDate birthDate, String workPlace, BigDecimal monthlyIncome, Bank bank, BigDecimal creditRating
     ) {
 
         super(name, birthDate);
@@ -58,13 +56,15 @@ public class Client extends Person {
     @Override
     public String toString() {
 
-        return "Client:{" +
-                "\n person='" + super.toString() + "'" +
-                ",\n placeOfWork='" + getWorkPlace() + "'" +
-                ",\n monthlyIncome='" + String.format("%.2f", getMonthlyIncome()) + "'" +
-                ",\n bank='" + getBank().getName() + "'" +
-                ",\n creditRating='" + String.format("%.2f", getCreditRating()) + "'" +
-                "\n}";
+        return """
+            Client:{
+                person='%s',
+                placeOfWork='%s',
+                monthlyIncome='%.2f',
+                bank='%s',
+                creditRating='%.2f'
+            }
+            """.formatted(super.toString(), getWorkPlace(), getMonthlyIncome(), getBank().getName(), getCreditRating());
     }
 
     public String getWorkPlace() {

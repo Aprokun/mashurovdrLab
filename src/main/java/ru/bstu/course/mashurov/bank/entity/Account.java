@@ -1,6 +1,7 @@
 package ru.bstu.course.mashurov.bank.entity;
 
 public class Account {
+
     private static int currentId;
     protected int id;
     protected Client client;
@@ -11,24 +12,29 @@ public class Account {
     }
 
     public Account() {
+
         initId();
         initWithDefaults();
     }
 
     public Account(Client client, Bank bank) {
+
         initId();
         initWithDefaults();
+
         this.client = client;
         this.bank = bank;
     }
 
     public Account(int id, Client client, Bank bank) {
+
         this.id = id;
         this.client = client;
         this.bank = bank;
     }
 
     public Account(Account account) {
+
         this.id = account.id;
         this.client = new Client(account.client);
         this.bank = new Bank(account.bank);
@@ -36,11 +42,14 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account:{" +
-                "\n id='" + getId() + "'" +
-                ",\n client='" + getClient() + "'" +
-                ",\n bank='" + getBank().getName() + "'" +
-                "\n}";
+
+        return """
+            Account:{
+                id='%s',
+                client='%s',
+                bank='%s'
+            }
+            """.formatted(getId(), getClient(), getBank().getName());
     }
 
     public int getId() {

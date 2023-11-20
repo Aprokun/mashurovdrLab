@@ -17,7 +17,7 @@ public interface BankOfficeService extends Crud<BankOffice> {
 
     boolean withdrawMoney(BankOffice bankOffice, BigDecimal amount);
 
-    void printBankOfficeData(int id);
+    void printData(int id);
 
     List<Employee> getAllEmployeesByOfficeId(int id);
 

@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 public class BankOfficeValidator  {
 
     public static boolean validateCreate(BankOffice bankOffice) {
+
         if (bankOffice == null) {
             return true;
         }
@@ -25,26 +26,32 @@ public class BankOfficeValidator  {
             System.err.println("Error: BankOffice - rentPrice must be non-negative");
             return true;
         }
+
         return false;
     }
 
     public static boolean validateInstallAtm(BankOffice bankOffice) {
+
         if (!bankOffice.getIsAtmPlaceable()) {
             System.err.println("Error: BankOffice - cannot install atm");
             return true;
         }
+
         return false;
     }
 
     public static boolean validateRemoveAtm(int newAtmCountOffice) {
+
         if (newAtmCountOffice < 0) {
             System.err.println("Error: BankOffice - cannot remove ATM, no ATMs");
             return true;
         }
+
         return false;
     }
 
     public static boolean validateDepositMoney(BankOffice bankOffice, BigDecimal amount) {
+
         if (bankOffice == null) {
             System.err.println("Error: BankOffice - cannot deposit money to not existing office");
             return true;
@@ -59,10 +66,12 @@ public class BankOfficeValidator  {
             System.err.println("Error: BankOffice - cannot deposit money - office cannot accept deposit");
             return true;
         }
+
         return false;
     }
 
     public static boolean validateWithdrawMoney(BankOffice bankOffice, BigDecimal amount) {
+
         if (bankOffice == null) {
             System.err.println("Error: BankOffice - cannot withdraw money from not existing office");
             return true;
@@ -82,6 +91,7 @@ public class BankOfficeValidator  {
             System.err.println("Error: BankOffice - cannot withdraw money - office does not have enough money");
             return true;
         }
+
         return false;
     }
 }

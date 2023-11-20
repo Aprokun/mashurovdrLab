@@ -2,10 +2,11 @@ package ru.bstu.course.mashurov.bank.service;
 
 import ru.bstu.course.mashurov.bank.entity.*;
 
+import javax.xml.crypto.Data;
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface BankService extends Crud<Bank> {
+public interface BankService extends Crud<Bank>, Datable {
 
     void setBankOfficeService(BankOfficeService bankOfficeService);
 
@@ -13,7 +14,7 @@ public interface BankService extends Crud<Bank> {
 
     List<BankOffice> getAllOfficesByBankId(int id);
 
-    void printBankData(int bankId);
+    void printData(int bankId);
 
     boolean addOffice(int bankId, BankOffice bankOffice);
 

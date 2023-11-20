@@ -15,6 +15,7 @@ public class Employee extends Person {
     private BigDecimal salary;
 
     public Employee() {
+
         super();
         initWithDefaults();
     }
@@ -49,15 +50,20 @@ public class Employee extends Person {
     @Override
     public String toString() {
 
-        return "Employee:{" +
-                "\n person='" + super.toString() + "'" +
-                ",\n job='" + getJob() + "'" +
-                ",\n bank='" + getBank().getName() + "'" +
-                ",\n isWorkingFromHome='" + isIsWorkingFromHome() + "'" +
-                ",\n bankOffice='" + getBankOffice() + "'" +
-                ",\n isCreditAvailable='" + isIsCreditAvailable() + "'" +
-                ",\n salary='" + String.format("%.2f", getSalary()) + "'" +
-                "\n}";
+        return """
+            Employee:{
+                person='%s',
+                job='%s',
+                bank='%s',
+                isWorkingFromHome='%s',
+                bankOffice='%s',
+                isCreditAvailable='%s',
+                salary='%.2f'
+            }
+        """.formatted(
+            super.toString(), getJob(), getBank().getName(), isIsWorkingFromHome(),
+            getBankOffice(), isIsCreditAvailable(), getSalary()
+        );
     }
 
     public EmployeePostValues getJob() {
@@ -117,6 +123,7 @@ public class Employee extends Person {
     }
 
     private void initWithDefaults() {
+
         job = null;
         bank = null;
         isWorkingFromHome = false;

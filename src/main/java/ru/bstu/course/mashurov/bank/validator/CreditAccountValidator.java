@@ -3,7 +3,9 @@ package ru.bstu.course.mashurov.bank.validator;
 import ru.bstu.course.mashurov.bank.entity.CreditAccount;
 
 public class CreditAccountValidator {
+
     public static boolean validateCreate(CreditAccount creditAccount) {
+
         if (creditAccount == null) {
             return true;
         }
@@ -22,14 +24,17 @@ public class CreditAccountValidator {
             System.err.println("Error: CreditAccount - no bank");
             return true;
         }
+
         return false;
     }
 
     public static boolean validateMakingMonthlyPayment(CreditAccount creditAccount) {
+
         if (creditAccount == null || creditAccount.getPaymentAccount() == null) {
             System.err.println("Error: CreditAccount - no account to take money from");
             return true;
         }
+
         return false;
     }
 }
