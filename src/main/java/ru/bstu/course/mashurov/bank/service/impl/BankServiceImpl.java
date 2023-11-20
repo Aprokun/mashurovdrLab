@@ -97,7 +97,9 @@ public class BankServiceImpl implements BankService {
 
     @Override
     public boolean addOffice(int bankId, BankOffice bankOffice) {
+
         Bank bank = findById(bankId);
+
         if (bank != null && bankOffice != null) {
             bankOffice.setBank(bank);
             bank.setOfficeCount(bank.getOfficeCount() + 1);
@@ -107,6 +109,7 @@ public class BankServiceImpl implements BankService {
             bankOffices.add(bankOffice);
             return true;
         }
+
         return false;
     }
 
