@@ -34,4 +34,10 @@ public interface BankService extends Crud<Bank> {
     boolean withdrawMoney(int id, BigDecimal amount);
 
     boolean approveCredit(Bank bank, CreditAccount account, Employee employee);
+
+    List<Bank> getBanksSuitable(BigDecimal sum, int countMonth) throws Exception;
+
+    boolean isBankSuitable(Bank bank, BigDecimal money) throws Exception;
+
+    List<BankOffice> getBankOfficeSuitableInBank(Bank bank, BigDecimal money) throws Exception;
 }

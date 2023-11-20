@@ -9,10 +9,7 @@ import ru.bstu.course.mashurov.bank.service.BankService;
 import ru.bstu.course.mashurov.bank.service.ClientService;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ClientServiceImpl implements ClientService {
 
@@ -28,6 +25,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client findById(Integer id) {
+
         Client client = clients.get(id);
 
         if (client == null) {
@@ -156,5 +154,14 @@ public class ClientServiceImpl implements ClientService {
                 creditAccounts.forEach(System.out::println);
             }
         }
+    }
+
+    @Override
+    public PaymentAccount getBestPaymentAccount(int id) throws Exception {
+
+        return getAllPaymentAccountsByClientId(id)
+            .stream()
+            .min(Comparator.comparing(PaymentAccount::getBalance))
+            .orElseThrow(Exception::new);
     }
 }

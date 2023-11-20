@@ -50,7 +50,7 @@ public class BankServiceImpl implements BankService {
 
         newBank.setRating((byte) random.nextInt(Bank.MAX_RATING.intValue() + 1));
         newBank.setTotalMoney(
-                Utils.between(new BigDecimal("0.0"), new BigDecimal("1.0").multiply(Bank.MAX_TOTAL_MONEY))
+            Utils.between(new BigDecimal("0.0"), new BigDecimal("1.0").multiply(Bank.MAX_TOTAL_MONEY))
         );
 
         calculateInterestRate(newBank);
@@ -246,14 +246,14 @@ public class BankServiceImpl implements BankService {
             final BigDecimal rating = BigDecimal.valueOf(bank.getRating());
 
             final BigDecimal centralBankInterestRate = Utils
-                    .between(new BigDecimal("0.0"), new BigDecimal("1.0"))
-                    .multiply(Bank.MAX_INTEREST_RATE);
+                .between(new BigDecimal("0.0"), new BigDecimal("1.0"))
+                .multiply(Bank.MAX_INTEREST_RATE);
 
             final BigDecimal maxBankInterestRateMargin = Bank.MAX_INTEREST_RATE.subtract(centralBankInterestRate);
 
             final BigDecimal bankInterestRateMargin = (Utils.between(new BigDecimal("0.0"), new BigDecimal("1.0"))
-                    .multiply(maxBankInterestRateMargin))
-                    .multiply((new BigDecimal("110").subtract(rating).divide(new BigDecimal("100"))));
+                .multiply(maxBankInterestRateMargin))
+                .multiply((new BigDecimal("110").subtract(rating).divide(new BigDecimal("100"))));
 
             final BigDecimal interestRate = centralBankInterestRate.add(bankInterestRateMargin);
 
@@ -291,5 +291,43 @@ public class BankServiceImpl implements BankService {
     @Override
     public boolean approveCredit(Bank bank, CreditAccount account, Employee employee) {
         return false;
+    }
+
+    @Override
+    public List<Bank> getBanksSuitable(BigDecimal sum, int countMonth) throws Exception {
+
+        List<Bank> banksSuitable = new ArrayList<>();
+
+        for (Bank bank : banks.values()) {
+            if (isBankSuitable(bank, sum)) {
+                banksSuitable.add(bank);
+            }
+        }
+
+        if (banksSuitable.isEmpty()) {
+            throw new Exception("Error: can't give credit");
+        }
+
+        return banksSuitable;
+    }
+
+    @Override
+    public boolean isBankSuitable(Bank bank, BigDecimal money) throws Exception {
+        List<BankOffice> bankOfficeSuitable = getBankOfficeSuitableInBank(bank, money);
+        return !bankOfficeSuitable.isEmpty();
+    }
+
+    @Override
+    public List<BankOffice> getBankOfficeSuitableInBank(Bank bank, BigDecimal money) throws Exception {
+        List<BankOffice> bankOfficesByBank = getAllOfficesByBankId(bank.getId());
+        List<BankOffice> suitableBankOffice = new ArrayList<>();
+
+        for (BankOffice bankOffice : bankOfficesByBank) {
+            if (bankOfficeService.isSuitableBankOffice(bankOffice, money)) {
+                suitableBankOffice.add(bankOffice);
+            }
+        }
+
+        return suitableBankOffice;
     }
 }
