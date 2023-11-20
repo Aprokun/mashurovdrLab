@@ -14,8 +14,6 @@ public interface BankService extends Crud<Bank>, Datable {
 
     List<BankOffice> getAllOfficesByBankId(int id);
 
-    void printData(int bankId);
-
     boolean addOffice(int bankId, BankOffice bankOffice);
 
     boolean removeOffice(int bankId, BankOffice bankOffice);
