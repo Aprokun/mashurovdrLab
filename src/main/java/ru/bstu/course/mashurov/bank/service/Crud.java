@@ -1,8 +1,12 @@
 package ru.bstu.course.mashurov.bank.service;
 
+import java.util.List;
+
 public interface Crud<T> {
 
-    T findOne(Integer id);
+    T findById(Integer id);
+
+    List<T> fetchAll();
 
     T create(T entity);
 

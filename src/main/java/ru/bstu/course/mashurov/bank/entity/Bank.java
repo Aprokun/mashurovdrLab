@@ -1,16 +1,15 @@
 package ru.bstu.course.mashurov.bank.entity;
 
-import java.math.BigDecimal;
-import java.util.UUID;
+import ru.bstu.course.mashurov.bank.service.impl.BankServiceImpl;
 
-import static ru.bstu.course.mashurov.bank.Utils.random;
+import java.math.BigDecimal;
 
 public class Bank {
 
     public static final BigDecimal MAX_RATING = new BigDecimal("100");
     public static final BigDecimal MAX_TOTAL_MONEY = new BigDecimal("1000000");
     public static final BigDecimal MAX_INTEREST_RATE = new BigDecimal("20");
-    private UUID id;
+    private int id;
     private String name;
     private int officeCount;
     private int atmCount;
@@ -21,11 +20,16 @@ public class Bank {
     private BigDecimal interestRate;
 
     public Bank() {
+        initId();
         initWithDefaults();
     }
 
+    private void initId() {
+        id = BankServiceImpl.currentId++;
+    }
+
     public Bank(Bank bank) {
-        this.id = UUID.fromString(bank.id.toString());
+        this.id = bank.id;
         this.name = bank.name;
         this.officeCount = bank.officeCount;
         this.atmCount = bank.atmCount;
@@ -37,11 +41,12 @@ public class Bank {
     }
 
     public Bank(String name) {
+        initId();
         initWithDefaults();
         this.name = name;
     }
 
-    public Bank(UUID id, String name) {
+    public Bank(int id, String name) {
         initWithDefaults();
         this.id = id;
         this.name = name;
@@ -62,11 +67,11 @@ public class Bank {
                 "\n}";
     }
 
-    public UUID getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -135,7 +140,6 @@ public class Bank {
     }
 
     private void initWithDefaults() {
-        id = UUID.randomUUID();
         name = "No name";
         officeCount = 0;
         atmCount = 0;
@@ -145,4 +149,5 @@ public class Bank {
         totalMoney = new BigDecimal("0");
         interestRate = new BigDecimal("0");
     }
+
 }

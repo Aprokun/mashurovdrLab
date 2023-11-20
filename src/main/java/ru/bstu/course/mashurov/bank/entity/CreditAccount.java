@@ -2,8 +2,6 @@ package ru.bstu.course.mashurov.bank.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.UUID;
 
 public class CreditAccount extends Account {
 
@@ -23,7 +21,9 @@ public class CreditAccount extends Account {
     }
 
     public CreditAccount(CreditAccount creditAccount) {
+
         super(creditAccount.id, creditAccount.client, creditAccount.bank);
+
         this.dateStart = creditAccount.dateStart;
         this.dateEnd = creditAccount.dateEnd;
         this.monthCount = creditAccount.monthCount;
@@ -35,10 +35,14 @@ public class CreditAccount extends Account {
         this.paymentAccount = new PaymentAccount(creditAccount.paymentAccount);
     }
 
-    public CreditAccount(Client client, Bank bank, LocalDate dateStart, LocalDate dateEnd, int monthCount,
-                         BigDecimal creditAmount, BigDecimal remainingCreditAmount, BigDecimal montlyPayment,
-                         BigDecimal interestRate, Employee employee, PaymentAccount paymentAccount) {
+    public CreditAccount(
+        Client client, Bank bank, LocalDate dateStart, LocalDate dateEnd, int monthCount,
+        BigDecimal creditAmount, BigDecimal remainingCreditAmount, BigDecimal montlyPayment,
+        BigDecimal interestRate, Employee employee, PaymentAccount paymentAccount
+    ) {
+
         super(client, bank);
+
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.monthCount = monthCount;
@@ -50,10 +54,14 @@ public class CreditAccount extends Account {
         this.paymentAccount = paymentAccount;
     }
 
-    public CreditAccount(UUID id, Client client, Bank bank, LocalDate dateStart, LocalDate dateEnd, int monthCount,
-                         BigDecimal creditAmount, BigDecimal remainingCreditAmount, BigDecimal montlyPayment,
-                         BigDecimal interestRate, Employee employee, PaymentAccount paymentAccount) {
+    public CreditAccount(
+        int id, Client client, Bank bank, LocalDate dateStart, LocalDate dateEnd, int monthCount,
+        BigDecimal creditAmount, BigDecimal remainingCreditAmount, BigDecimal montlyPayment,
+        BigDecimal interestRate, Employee employee, PaymentAccount paymentAccount
+    ) {
+
         super(id, client, bank);
+
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.monthCount = monthCount;
@@ -67,6 +75,7 @@ public class CreditAccount extends Account {
 
     @Override
     public String toString() {
+
         return "CreditAccount:{" +
                 "\n account='" + super.toString() + "'" +
                 ",\n dateStart='" + getDateStart() + "'" +
@@ -164,4 +173,5 @@ public class CreditAccount extends Account {
         employee = null;
         paymentAccount = null;
     }
+
 }

@@ -1,49 +1,62 @@
 package ru.bstu.course.mashurov.bank.entity;
 
 import java.time.LocalDate;
-import java.util.UUID;
+import java.time.format.DateTimeFormatter;
 
 public class Person {
-    protected UUID id;
+    private static int currentId;
+    protected int id;
     protected String name;
-    protected LocalDate birthDate;
+    protected LocalDate birthdDate;
+
+    private void initId() {
+        id = currentId++;
+    }
 
     public Person() {
+
+        initId();
         initWithDefaults();
     }
 
     public Person(Person person) {
-        this.id = UUID.fromString(person.id.toString());
+
+        this.id = person.id;
         this.name = person.name;
-        this.birthDate = person.birthDate;
+        this.birthdDate = person.birthdDate;
     }
 
     public Person(String name, LocalDate birthDate) {
+
+        initId();
         initWithDefaults();
+
         this.name = name;
-        this.birthDate = birthDate;
+        this.birthdDate = birthDate;
     }
 
-    public Person(UUID id, String name, LocalDate birthdDate) {
+    public Person(int id, String name, LocalDate birthdDate) {
+
         this.id = id;
         this.name = name;
-        this.birthDate = birthdDate;
+        this.birthdDate = birthdDate;
     }
 
     @Override
     public String toString() {
+
         return "Person:{" +
                 "\n id='" + getId() + "'" +
                 ",\n name='" + getName() + "'" +
-                ",\n birthdDate='" + getBirthDate() + "'" +
+                ",\n birthdDate='" + getBirthdDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "'" +
                 "\n}";
     }
 
-    public UUID getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -55,18 +68,17 @@ public class Person {
         this.name = name;
     }
 
-    public LocalDate getBirthDate() {
-        return this.birthDate;
+    public LocalDate getBirthdDate() {
+        return this.birthdDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthdDate(LocalDate birthdDate) {
+        this.birthdDate = birthdDate;
     }
 
     private void initWithDefaults() {
-        id = UUID.randomUUID();
         name = "No name";
-        birthDate = null;
+        birthdDate = null;
     }
 
 }

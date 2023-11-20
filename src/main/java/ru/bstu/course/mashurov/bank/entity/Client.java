@@ -2,12 +2,11 @@ package ru.bstu.course.mashurov.bank.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class Client extends Person {
 
     public static final BigDecimal MAX_MONTHLY_INCOME = new BigDecimal("10000");
-    private String placeOfWork;
+    private String workPlace;
     private BigDecimal monthlyIncome;
     private Bank bank;
     private BigDecimal creditRating;
@@ -17,30 +16,40 @@ public class Client extends Person {
     }
 
     public Client(Client client) {
-        super(client.id, client.name, client.birthDate);
-        this.placeOfWork = client.placeOfWork;
+
+        super(client.id, client.name, client.birthdDate);
+
+        this.workPlace = client.workPlace;
         this.monthlyIncome = client.monthlyIncome;
         this.bank = new Bank(client.bank);
         this.creditRating = client.creditRating;
     }
 
-    public Client(String name, LocalDate birthDate, String placeOfWork, BigDecimal monthlyIncome, Bank bank,
-                  BigDecimal creditRating) {
+    public Client(
+        String name, LocalDate birthDate, String workPlace, BigDecimal monthlyIncome, Bank bank,
+        BigDecimal creditRating
+    ) {
+
+        super(name, birthDate);
+
         initWithDefaults();
+
         this.name = name;
-        this.birthDate = birthDate;
-        this.placeOfWork = placeOfWork;
+        this.birthdDate = birthDate;
+        this.workPlace = workPlace;
         this.monthlyIncome = monthlyIncome;
         this.bank = bank;
         this.creditRating = creditRating;
     }
 
-    public Client(UUID id, String name, LocalDate birthDate, String placeOfWork, BigDecimal monthlyIncome, Bank bank,
-                  BigDecimal creditRating) {
-        this.id = id;
-        this.name = name;
-        this.birthDate = birthDate;
-        this.placeOfWork = placeOfWork;
+    public Client(
+        int id, String name, LocalDate birthDate, String workPlace, BigDecimal monthlyIncome, Bank bank,
+        BigDecimal creditRating
+    ) {
+
+        super(id, name, birthDate);
+
+        this.workPlace = workPlace;
         this.monthlyIncome = monthlyIncome;
         this.bank = bank;
         this.creditRating = creditRating;
@@ -48,21 +57,22 @@ public class Client extends Person {
 
     @Override
     public String toString() {
-        return "Clien:{" +
+
+        return "Client:{" +
                 "\n person='" + super.toString() + "'" +
-                ",\n placeOfWork='" + getPlaceOfWork() + "'" +
+                ",\n placeOfWork='" + getWorkPlace() + "'" +
                 ",\n monthlyIncome='" + String.format("%.2f", getMonthlyIncome()) + "'" +
-                ",\n bank='" + getBank() + "'" +
+                ",\n bank='" + getBank().getName() + "'" +
                 ",\n creditRating='" + String.format("%.2f", getCreditRating()) + "'" +
                 "\n}";
     }
 
-    public String getPlaceOfWork() {
-        return this.placeOfWork;
+    public String getWorkPlace() {
+        return this.workPlace;
     }
 
-    public void setPlaceOfWork(String placeOfWork) {
-        this.placeOfWork = placeOfWork;
+    public void setWorkPlace(String workPlace) {
+        this.workPlace = workPlace;
     }
 
     public BigDecimal getMonthlyIncome() {
@@ -90,7 +100,8 @@ public class Client extends Person {
     }
 
     private void initWithDefaults() {
-        placeOfWork = "No place of work";
+
+        workPlace = "No place of work";
         monthlyIncome = new BigDecimal("0");
         bank = null;
         creditRating = new BigDecimal("0");

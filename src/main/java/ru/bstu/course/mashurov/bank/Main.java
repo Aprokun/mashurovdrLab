@@ -2,70 +2,186 @@ package ru.bstu.course.mashurov.bank;
 
 import ru.bstu.course.mashurov.bank.entity.*;
 import ru.bstu.course.mashurov.bank.entity.values.BankAtmStatusValues;
-import ru.bstu.course.mashurov.bank.entity.values.BankOfficeStatusValues;
-import ru.bstu.course.mashurov.bank.entity.values.EmployeePostValues;
 import ru.bstu.course.mashurov.bank.service.*;
 import ru.bstu.course.mashurov.bank.service.impl.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        Random random = new Random();
+        Scanner scanner = new Scanner(System.in);
+
         BankService bankService = new BankServiceImpl();
-        Bank bank = bankService.create(new Bank("Sbebra bank"));
-        System.out.println(bank);
+        ClientService clientService = new ClientServiceImpl(bankService);
+        BankOfficeService bankOfficeService = new BankOfficeServiceImpl(bankService);
+        bankService.setBankOfficeService(bankOfficeService);
+        bankService.setClientService(clientService);
 
-        BankOfficeService bankOfficeService = new BankOfficeServiceImpl();
-        BankOffice bankOffice = bankOfficeService.create(new BankOffice(
-                "Sbebra Bank Office",
-                "Free City of Braavos",
-                bank,
-                true,
-                true,
-                0,
-                true,
-                true,
-                true,
-                bank.getTotalMoney(),
-                new BigDecimal("700")));
-        System.out.println(bankOffice);
+        bankService.setBankOfficeService(bankOfficeService);
+        EmployeeService employeeService = new EmployeeServiceImpl(bankOfficeService);
+        AtmService atmService = new AtmServiceImpl(bankOfficeService);
+        bankService.setClientService(clientService);
+        PaymentAccountService paymentAccountService = new PaymentAccountServiceImpl(clientService);
+        CreditAccountService creditAccountService = new CreditAccountServiceImpl(clientService);
 
-        EmployeeService employeeService = new EmployeeServiceImpl();
-        Employee employee = employeeService
-                .create(new Employee("Tycho Nestoris", LocalDate.of(270, 2, 21), EmployeePostValues.OFFICE_EMPLOYEE, bank, true,
-                        bankOffice, true, new BigDecimal("10")));
-        System.out.println(employee);
+        // Создадим банки
+        bankService.create(new Bank("Sbebra Bank"));
+        bankService.create(new Bank("Tinkonn"));
+        bankService.create(new Bank("BTV"));
+        bankService.create(new Bank("Beta bank"));
+        bankService.create(new Bank("Dimalegenda bank"));
 
-        AtmService atmService = new AtmServiceImpl();
-        BankAtm bankAtm = atmService.create(new BankAtm("First ATM of Braavos", bankOffice.getAddress(), BankAtmStatusValues.WORKING, bank,
-                bankOffice, employee, true, true, new BigDecimal("0"), new BigDecimal("25")));
-        System.out.println(bankAtm);
-
-        ClientService userService = new ClientServiceImpl();
-        Client user = userService
-                .create(
-                        new Client(
-                                "Stannis Baratheon", LocalDate.of(264, 2, 15),
-                                "Dragon Stone", new BigDecimal("1000"), bank, new BigDecimal("999999999")
-                        )
+        // Создание офисов в каждом банке
+        List<Bank> banks = bankService.fetchAll();
+        for (Bank bank : banks) {
+            for (int i = 1; i <= 3; i++) {
+                bankOfficeService.create(
+                    new BankOffice(
+                        "Office №" + i + " of " + bank.getName(), "Esenina str. " + i,
+                        bank, true, true, 0, true, true,
+                        true, new BigDecimal("20000"), new BigDecimal(100 * i)
+                    )
                 );
-        System.out.println(user);
+            }
+        }
 
-        PaymentAccountService paymentAccountService = new PaymentAccountServiceImpl();
-        PaymentAccount paymentAccount = paymentAccountService
-                .create(new PaymentAccount(user, bank, new BigDecimal("9000")));
-        System.out.println(paymentAccount);
+        // Добавление сотрудников в каждый офис
+        List<BankOffice> offices = bankOfficeService.fetchAll();
+        for (BankOffice office : offices) {
+            for (int i = 1; i <= 5; i++) {
+                employeeService.create(
+                    new Employee(
+                        Utils.getNames()[random.nextInt(Utils.getNames().length)],
+                        LocalDate.of(random.nextInt(1990, 2003), random.nextInt(1, 13), random.nextInt(1, 29)),
+                        Utils.getRandomEmployee(), office.getBank(), true, office, true, new BigDecimal("300")
+                    )
+                );
+            }
+        }
 
-        CreditAccountService creditAccountService = new CreditAccountServiceImpl();
-        CreditAccount creditAccount = creditAccountService.create(new CreditAccount(user, bank,
-                LocalDate.of(298, 1, 1), LocalDate.of(302, 1, 1), 48, new BigDecimal("29000"),
-                new BigDecimal("29000"),
-                new BigDecimal("100"), new BigDecimal("2"), employee, paymentAccount));
+        // Добавление банкоматов в каждый офис
+        for (BankOffice office : offices) {
+            for (int i = 1; i <= 3; i++) {
+                atmService.create(
+                    new BankAtm(
+                        "Atm " + i, office.getAddress(), BankAtmStatusValues.WORKING, office.getBank(), office,
+                        bankOfficeService.getAllEmployeesByOfficeId(office.getId()).get(random.nextInt(bankOfficeService.getAllEmployeesByOfficeId(office.getId()).size())),
+                        true, true, new BigDecimal("0"), BigDecimal.valueOf(random.nextDouble() * 25)
+                    )
+                );
+            }
+        }
 
-        System.out.println(creditAccount);
+        // Добавление клиентов в каждый банк
+        for (Bank bank : banks) {
+            for (int i = 1; i <= 5; i++) {
+                clientService.create(
+                    new Client(
+                        Utils.getNames()[(random.nextInt(Utils.getNames().length))],
+                        LocalDate.of(random.nextInt(200, 300), random.nextInt(1, 13), random.nextInt(1, 29)),
+                        Utils.getWorkPlaces()[random.nextInt(Utils.getWorkPlaces().length)],
+                        BigDecimal.valueOf(random.nextDouble() * 10000), bank, new BigDecimal(random.nextInt(10000))
+                    )
+                );
+            }
+        }
+
+        // Добавление платежных счетов каждому клиенту
+        List<Client> clients = clientService.fetchAll();
+        for (Client client : clients) {
+            for (int i = 1; i <= 2; i++) {
+                paymentAccountService.create(
+                    new PaymentAccount(client, client.getBank(), BigDecimal.valueOf(random.nextDouble() * 10000))
+                );
+            }
+        }
+
+        // Добавление кредитных счетов каждому клиенту
+        for (Client client : clients) {
+            for (int i = 1; i <= 2; i++) {
+
+                List<BankOffice> bankOffices = bankService.getAllOfficesByBankId(client.getBank().getId());
+
+                BankOffice randomOffice = bankOffices.get(random.nextInt(bankOffices.size()));
+
+                List<Employee> officeEmployees = bankOfficeService.getAllEmployeesByOfficeId(randomOffice.getId());
+
+                Employee randomEmployee = officeEmployees.get(random.nextInt(officeEmployees.size()));
+
+                CreditAccount creditAccount = new CreditAccount(
+                    client, client.getBank(), LocalDate.of(2023, 10, 1),
+                    LocalDate.of(2026, 10, 1), 36,
+                    new BigDecimal("2600"), new BigDecimal("2600"), new BigDecimal("100"),
+                    client.getBank().getInterestRate(), randomEmployee,
+                    clientService.getAllPaymentAccountsByClientId(client.getId()).get(random.nextInt(clientService.getAllPaymentAccountsByClientId(client.getId()).size()))
+                );
+
+                creditAccountService.create(creditAccount);
+            }
+        }
+
+        System.out.println("\nLab #2.");
+
+        label:
+        while (true) {
+
+            System.out.println("\nPick an action: ");
+            System.out.println("b - check bank data by bank id");
+            System.out.println("c - check client data by client id");
+            System.out.println("q - quit program");
+
+            String action = scanner.nextLine();
+
+            switch (action) {
+
+                case "b":
+
+                    System.out.println("Number of banks in the system: " + bankService.fetchAll().size());
+
+                    for (Bank bank : bankService.fetchAll()) {
+                        System.out.println("id: " + bank.getId() + " - " + bank.getName());
+                    }
+
+                    System.out.println("Enter bank id:");
+
+                    int bankIdToPrint = scanner.nextInt();
+                    scanner.nextLine();
+                    bankService.printBankData(bankIdToPrint);
+
+                    break;
+
+                case "c":
+
+                    System.out.println("Number of clients in the system: " + clientService.fetchAll().size());
+
+                    for (Client client : clientService.fetchAll()) {
+                        System.out.println("id: " + client.getId() + " - " + client.getName());
+                    }
+
+                    System.out.println("Enter client id:");
+
+                    int clientIdToPrint = scanner.nextInt();
+                    scanner.nextLine();
+                    clientService.printClientData(clientIdToPrint, true);
+
+                    break;
+
+                case "q":
+                    break label;
+
+                default:
+                    System.out.println("Error: unknown action. Please, try again");
+                    break;
+            }
+        }
+
+        scanner.close();
     }
 }

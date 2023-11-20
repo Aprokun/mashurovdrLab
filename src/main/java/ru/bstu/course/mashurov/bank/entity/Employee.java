@@ -4,7 +4,6 @@ import ru.bstu.course.mashurov.bank.entity.values.EmployeePostValues;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Employee extends Person {
 
@@ -21,7 +20,9 @@ public class Employee extends Person {
     }
 
     public Employee(Employee employee) {
-        super(employee.id, employee.name, employee.birthDate);
+
+        super(employee.id, employee.name, employee.birthdDate);
+
         this.job = employee.job;
         this.bank = new Bank(employee.bank);
         this.isWorkingFromHome = employee.isWorkingFromHome;
@@ -30,9 +31,13 @@ public class Employee extends Person {
         this.salary = employee.salary;
     }
 
-    public Employee(String name, LocalDate birthDate, EmployeePostValues job, Bank bank, boolean isWorkingFromHome,
-                    BankOffice bankOffice, boolean isCreditAvailable, BigDecimal salary) {
+    public Employee(
+        String name, LocalDate birthDate, EmployeePostValues job, Bank bank, boolean isWorkingFromHome,
+        BankOffice bankOffice, boolean isCreditAvailable, BigDecimal salary
+    ) {
+
         super(name, birthDate);
+
         this.job = job;
         this.bank = bank;
         this.isWorkingFromHome = isWorkingFromHome;
@@ -43,10 +48,11 @@ public class Employee extends Person {
 
     @Override
     public String toString() {
+
         return "Employee:{" +
                 "\n person='" + super.toString() + "'" +
                 ",\n job='" + getJob() + "'" +
-                ",\n bank='" + getBank() + "'" +
+                ",\n bank='" + getBank().getName() + "'" +
                 ",\n isWorkingFromHome='" + isIsWorkingFromHome() + "'" +
                 ",\n bankOffice='" + getBankOffice() + "'" +
                 ",\n isCreditAvailable='" + isIsCreditAvailable() + "'" +
@@ -118,4 +124,5 @@ public class Employee extends Person {
         isCreditAvailable = false;
         salary = new BigDecimal("0");
     }
+
 }

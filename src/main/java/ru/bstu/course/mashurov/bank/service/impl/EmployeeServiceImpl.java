@@ -1,17 +1,52 @@
 package ru.bstu.course.mashurov.bank.service.impl;
 
+import ru.bstu.course.mashurov.bank.entity.BankOffice;
 import ru.bstu.course.mashurov.bank.entity.Employee;
+import ru.bstu.course.mashurov.bank.validator.EmployeeValidator;
+import ru.bstu.course.mashurov.bank.service.BankOfficeService;
 import ru.bstu.course.mashurov.bank.service.EmployeeService;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class EmployeeServiceImpl implements EmployeeService {
-    @Override
-    public Employee findOne(Integer id) {
-        return null;
+
+    private final Map<Integer, Employee> employees = new HashMap<>();
+    private final BankOfficeService bankOfficeService;
+
+    public EmployeeServiceImpl(BankOfficeService bankOfficeService) {
+        this.bankOfficeService = bankOfficeService;
     }
 
     @Override
-    public Employee create(Employee entity) {
-        return entity;
+    public Employee findById(Integer id) {
+
+        Employee employee = employees.get(id);
+
+        if (employee == null) {
+            System.err.println("Employee with id " + id + " is not found");
+        }
+
+        return employee;    }
+
+    @Override
+    public List<Employee> fetchAll() {
+        return new ArrayList<>(employees.values());
+    }
+
+    @Override
+    public Employee create(Employee employee) {
+
+        if (EmployeeValidator.validateCreate(employee)) return null;
+
+        Employee newEmployee = new Employee(employee);
+
+        employees.put(newEmployee.getId(), newEmployee);
+        bankOfficeService.addEmployee(newEmployee.getBankOffice().getId(), newEmployee);
+
+        return newEmployee;
     }
 
     @Override
@@ -22,5 +57,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void update(Employee entity) {
 
+    }
+
+    @Override
+    public boolean transferEmployee(Employee employee, BankOffice bankOffice) {
+        return false;
     }
 }

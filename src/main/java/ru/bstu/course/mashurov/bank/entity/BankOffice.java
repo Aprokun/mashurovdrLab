@@ -1,11 +1,12 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import ru.bstu.course.mashurov.bank.service.impl.BankOfficeServiceImpl;
+
 import java.math.BigDecimal;
-import java.util.UUID;
 
 public class BankOffice {
 
-    private UUID id;
+    private int id;
     private String name;
     private String address;
     private Bank bank;
@@ -18,15 +19,25 @@ public class BankOffice {
     private BigDecimal totalMoney;
     private BigDecimal rentPrice;
 
+    private void initId() {
+        id = BankOfficeServiceImpl.currentId++;
+    }
+
     public BankOffice(String name, String address) {
+
+        initId();
         initWithDefaults();
+
         this.name = name;
         this.address = address;
     }
 
-    public BankOffice(UUID id, String name, String address, Bank bank, boolean isWorking, boolean isAtmPlaceable,
-                      int atmCount, boolean isCreditAvailable, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable,
-                      BigDecimal totalMoney, BigDecimal rentPrice) {
+    public BankOffice(
+        int id, String name, String address, Bank bank, boolean isWorking, boolean isAtmPlaceable,
+            int atmCount, boolean isCreditAvailable, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable,
+            BigDecimal totalMoney, BigDecimal rentPrice
+    ) {
+
         this.id = id;
         this.name = name;
         this.address = address;
@@ -41,10 +52,15 @@ public class BankOffice {
         this.rentPrice = rentPrice;
     }
 
-    public BankOffice(String name, String address, Bank bank, boolean isWorking, boolean isAtmPlaceable,
-                      int atmCount, boolean isCreditAvailable, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable,
-                      BigDecimal totalMoney, BigDecimal rentPrice) {
+    public BankOffice(
+        String name, String address, Bank bank, boolean isWorking, boolean isAtmPlaceable,
+        int atmCount, boolean isCreditAvailable, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable,
+        BigDecimal totalMoney, BigDecimal rentPrice
+    ) {
+
+        initId();
         initWithDefaults();
+
         this.name = name;
         this.address = address;
         this.bank = bank;
@@ -59,7 +75,8 @@ public class BankOffice {
     }
 
     public BankOffice(BankOffice bankOffice) {
-        this.id = UUID.fromString(bankOffice.id.toString());
+
+        this.id = bankOffice.id;
         this.name = bankOffice.name;
         this.address = bankOffice.address;
         this.bank = new Bank(bankOffice.bank);
@@ -75,11 +92,12 @@ public class BankOffice {
 
     @Override
     public String toString() {
+
         return "BankOffice:{" +
                 "\n id='" + getId() + "'" +
                 ",\n name='" + getName() + "'" +
                 ",\n address='" + getAddress() + "'" +
-                ",\n bank='" + getBank() + "'" +
+                ",\n bank='" + getBank().getName() + "'" +
                 ",\n isWorking='" + isIsWorking() + "'" +
                 ",\n isAtmPlaceable='" + isIsAtmPlaceable() + "'" +
                 ",\n atmCount='" + getAtmCount() + "'" +
@@ -91,11 +109,11 @@ public class BankOffice {
                 "\n}";
     }
 
-    public UUID getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -208,7 +226,6 @@ public class BankOffice {
     }
 
     private void initWithDefaults() {
-        id = UUID.randomUUID();
         name = "No name";
         address = "No address";
         bank = null;
@@ -221,4 +238,5 @@ public class BankOffice {
         totalMoney = new BigDecimal("0");
         rentPrice = new BigDecimal("0");
     }
+
 }
