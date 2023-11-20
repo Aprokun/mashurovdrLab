@@ -3,9 +3,11 @@ package ru.bstu.course.mashurov.bank.entity;
 import java.math.BigDecimal;
 
 public class PaymentAccount extends Account {
+
     private BigDecimal balance;
 
     public PaymentAccount() {
+
         super();
         initWithDefaults();
     }
@@ -34,10 +36,12 @@ public class PaymentAccount extends Account {
     @Override
     public String toString() {
 
-        return "PaymentAccount:{" +
-                "\n account='" + super.toString() + "'" +
-                ",\n balance='" + String.format("%.2f", getBalance()) + "'" +
-                "\n}";
+        return """
+            PaymentAccount:{
+                account='%s',
+                balance='%.2f'
+            }
+            """.formatted(super.toString(), getBalance());
     }
 
     public BigDecimal getBalance() {

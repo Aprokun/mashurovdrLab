@@ -149,7 +149,7 @@ public class BankOfficeServiceImpl implements BankOfficeService {
     }
 
     @Override
-    public void printBankOfficeData(int id) {
+    public void printData(int id) {
 
         BankOffice bankOffice = findById(id);
 
@@ -163,19 +163,17 @@ public class BankOfficeServiceImpl implements BankOfficeService {
         List<Employee> employees = getAllEmployeesByOfficeId(id);
 
         if (employees != null) {
+
             System.out.println("Employees:");
-            employees.forEach((Employee employee) -> {
-                System.out.println(employee);
-            });
+            employees.forEach(System.out::println);
         }
 
         List<BankAtm> atms = atmsByOfficeId.get(id);
 
         if (atms != null) {
+
             System.out.println("Atms:");
-            atms.forEach((BankAtm atm) -> {
-                System.out.println(atm);
-            });
+            atms.forEach(System.out::println);
         }
 
         System.out.println("=====================");
@@ -188,6 +186,7 @@ public class BankOfficeServiceImpl implements BankOfficeService {
 
     @Override
     public boolean addEmployee(int id, Employee employee) {
+
         BankOffice bankOffice = findById(id);
 
         if (bankOffice != null && employee != null) {

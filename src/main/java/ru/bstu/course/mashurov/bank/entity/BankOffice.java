@@ -34,8 +34,8 @@ public class BankOffice {
 
     public BankOffice(
         int id, String name, String address, Bank bank, boolean isWorking, boolean isAtmPlaceable,
-            int atmCount, boolean isCreditAvailable, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable,
-            BigDecimal totalMoney, BigDecimal rentPrice
+        int atmCount, boolean isCreditAvailable, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable,
+        BigDecimal totalMoney, BigDecimal rentPrice
     ) {
 
         this.id = id;
@@ -93,20 +93,27 @@ public class BankOffice {
     @Override
     public String toString() {
 
-        return "BankOffice:{" +
-                "\n id='" + getId() + "'" +
-                ",\n name='" + getName() + "'" +
-                ",\n address='" + getAddress() + "'" +
-                ",\n bank='" + getBank().getName() + "'" +
-                ",\n isWorking='" + isIsWorking() + "'" +
-                ",\n isAtmPlaceable='" + isIsAtmPlaceable() + "'" +
-                ",\n atmCount='" + getAtmCount() + "'" +
-                ",\n isCreditAvailable='" + isIsCreditAvailable() + "'" +
-                ",\n isCashWithdrawalAvailable='" + isIsCashWithdrawalAvailable() + "'" +
-                ",\n isCashDepositAvailable='" + isIsCashDepositAvailable() + "'" +
-                ",\n totalMoney='" + String.format("%.2f", getTotalMoney()) + "'" +
-                ",\n rentPrice='" + String.format("%.2f", getRentPrice()) + "'" +
-                "\n}";
+        return """
+            BankOffice:{
+                id='%s',
+                name='%s',
+                address='%s',
+                bank='%s',
+                isWorking='%s',
+                isAtmPlaceable='%s',
+                atmCount='%s',
+                isCreditAvailable='%s',
+                isCashWithdrawalAvailable='%s',
+                isCashDepositAvailable='%s',
+                totalMoney='%.2f',
+                rentPrice='%.2f'
+            }
+            """
+            .formatted(
+                getId(), getName(), getAddress(), getBank().getName(), isIsWorking(), isIsAtmPlaceable(),
+                getAtmCount(), isIsCreditAvailable(), isIsCashWithdrawalAvailable(),
+                isIsCashDepositAvailable(), getTotalMoney(), getRentPrice()
+            );
     }
 
     public int getId() {
@@ -226,6 +233,7 @@ public class BankOffice {
     }
 
     private void initWithDefaults() {
+
         name = "No name";
         address = "No address";
         bank = null;

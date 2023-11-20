@@ -45,11 +45,13 @@ public class Person {
     @Override
     public String toString() {
 
-        return "Person:{" +
-                "\n id='" + getId() + "'" +
-                ",\n name='" + getName() + "'" +
-                ",\n birthdDate='" + getBirthdDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "'" +
-                "\n}";
+        return """
+            Person:{
+                id='%s',
+                name='%s',
+                birthDate='%s'
+            }
+            """.formatted(getId(), getName(), getBirthdDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
     }
 
     public int getId() {
@@ -77,6 +79,7 @@ public class Person {
     }
 
     private void initWithDefaults() {
+
         name = "No name";
         birthdDate = null;
     }

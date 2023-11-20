@@ -23,10 +23,13 @@ public class AtmServiceImpl implements AtmService {
 
     @Override
     public BankAtm findById(Integer id) {
+
         BankAtm atm = atms.get(id);
+
         if (atm == null) {
             System.err.println("Atm with id " + id + " is not found");
         }
+
         return atm;
     }
 

@@ -6,9 +6,6 @@ import java.math.BigDecimal;
 
 public class Bank {
 
-    public static final BigDecimal MAX_RATING = new BigDecimal("100");
-    public static final BigDecimal MAX_TOTAL_MONEY = new BigDecimal("1000000");
-    public static final BigDecimal MAX_INTEREST_RATE = new BigDecimal("20");
     private int id;
     private String name;
     private int officeCount;
@@ -20,6 +17,7 @@ public class Bank {
     private BigDecimal interestRate;
 
     public Bank() {
+
         initId();
         initWithDefaults();
     }
@@ -29,6 +27,7 @@ public class Bank {
     }
 
     public Bank(Bank bank) {
+
         this.id = bank.id;
         this.name = bank.name;
         this.officeCount = bank.officeCount;
@@ -41,30 +40,41 @@ public class Bank {
     }
 
     public Bank(String name) {
+
         initId();
         initWithDefaults();
+
         this.name = name;
     }
 
     public Bank(int id, String name) {
+
         initWithDefaults();
+
         this.id = id;
         this.name = name;
     }
 
     @Override
     public String toString() {
-        return "Bank:{" +
-                "\n id='" + getId() + "'" +
-                ",\n name='" + getName() + "'" +
-                ",\n officeCount='" + getOfficeCount() + "'" +
-                ",\n atmCount='" + getAtmCount() + "'" +
-                ",\n employeeCount='" + getEmployeeCount() + "'" +
-                ",\n clientCount='" + getClientCount() + "'" +
-                ",\n rating='" + getRating() + "'" +
-                ",\n totalMoney='" + String.format("%.2f", getTotalMoney()) + "'" +
-                ",\n interestRate='" + String.format("%.2f", getInterestRate()) + "'" +
-                "\n}";
+
+        return """
+            Bank:{
+                id='%s',
+                name='%s',
+                officeCount='%s',
+                atmCount='%s',
+                employeeCount='%s',
+                clientCount='%s',
+                rating='%s',
+                totalMoney='%.2f',
+                interestRate='%.2f'
+            }
+            """
+            .formatted(
+                getId(), getName(), getOfficeCount(), getAtmCount(), getEmployeeCount(),
+                getClientCount(), getRating(), getTotalMoney(), getInterestRate()
+            );
     }
 
     public int getId() {
@@ -140,6 +150,7 @@ public class Bank {
     }
 
     private void initWithDefaults() {
+
         name = "No name";
         officeCount = 0;
         atmCount = 0;

@@ -4,6 +4,7 @@ import ru.bstu.course.mashurov.bank.Utils;
 import ru.bstu.course.mashurov.bank.entity.Client;
 import ru.bstu.course.mashurov.bank.entity.CreditAccount;
 import ru.bstu.course.mashurov.bank.entity.PaymentAccount;
+import ru.bstu.course.mashurov.bank.entity.values.Constants;
 import ru.bstu.course.mashurov.bank.validator.ClientValidator;
 import ru.bstu.course.mashurov.bank.service.BankService;
 import ru.bstu.course.mashurov.bank.service.ClientService;
@@ -49,7 +50,7 @@ public class ClientServiceImpl implements ClientService {
 
         final BigDecimal monthlyIncome = Utils
                 .between(new BigDecimal("0.0"), new BigDecimal("1.0"))
-                .multiply(Client.MAX_MONTHLY_INCOME);
+                .multiply(Constants.MAX_MONTHLY_INCOME);
 
         createdClient.setMonthlyIncome(monthlyIncome);
 
@@ -119,7 +120,7 @@ public class ClientServiceImpl implements ClientService {
     public BigDecimal calculateCreditRating(Client client) {
 
         client.setCreditRating(
-                client.getMonthlyIncome().divide(new BigDecimal("1000").multiply(new BigDecimal("100")))
+            client.getMonthlyIncome().divide(new BigDecimal("1000").multiply(new BigDecimal("100")))
         );
 
         return client.getCreditRating();
