@@ -1,8 +1,11 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Data
 public class Client extends Person {
 
     private String workPlace;
@@ -11,8 +14,11 @@ public class Client extends Person {
     private BigDecimal creditRating;
 
     public Client() {
-        initWithDefaults();
-    }
+
+        this.placeOfWork = "No place of work";
+        this.monthlyIncome = new BigDecimal("0");
+        this.bank = null;
+        this.creditRating = new BigDecimal("0");    }
 
     public Client(Client client) {
 
@@ -29,8 +35,6 @@ public class Client extends Person {
     ) {
 
         super(name, birthDate);
-
-        initWithDefaults();
 
         this.name = name;
         this.birthdDate = birthDate;
@@ -65,46 +69,6 @@ public class Client extends Person {
                 creditRating='%.2f'
             }
             """.formatted(super.toString(), getWorkPlace(), getMonthlyIncome(), getBank().getName(), getCreditRating());
-    }
-
-    public String getWorkPlace() {
-        return this.workPlace;
-    }
-
-    public void setWorkPlace(String workPlace) {
-        this.workPlace = workPlace;
-    }
-
-    public BigDecimal getMonthlyIncome() {
-        return this.monthlyIncome;
-    }
-
-    public void setMonthlyIncome(BigDecimal monthlyIncome) {
-        this.monthlyIncome = monthlyIncome;
-    }
-
-    public Bank getBank() {
-        return this.bank;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
-
-    public BigDecimal getCreditRating() {
-        return this.creditRating;
-    }
-
-    public void setCreditRating(BigDecimal creditRating) {
-        this.creditRating = creditRating;
-    }
-
-    private void initWithDefaults() {
-
-        workPlace = "No place of work";
-        monthlyIncome = new BigDecimal("0");
-        bank = null;
-        creditRating = new BigDecimal("0");
     }
 
 }

@@ -19,7 +19,16 @@ public class Bank {
     public Bank() {
 
         initId();
-        initWithDefaults();
+
+        this.id = UUID.randomUUID();
+        this.name = "No name";
+        this.officeCount = 0;
+        this.atmCount = 0;
+        this.employeeCount = 0;
+        this.clientCount = 0;
+        this.rating = 0;
+        this.totalMoney = new BigDecimal("0");
+        this.interestRate = new BigDecimal("0");
     }
 
     private void initId() {
@@ -42,15 +51,26 @@ public class Bank {
     public Bank(String name) {
 
         initId();
-        initWithDefaults();
 
+        this.officeCount = 0;
+        this.atmCount = 0;
+        this.employeeCount = 0;
+        this.clientCount = 0;
+        this.rating = 0;
+        this.totalMoney = new BigDecimal("0");
+        this.interestRate = new BigDecimal("0");
         this.name = name;
     }
 
     public Bank(int id, String name) {
 
-        initWithDefaults();
-
+        this.officeCount = 0;
+        this.atmCount = 0;
+        this.employeeCount = 0;
+        this.clientCount = 0;
+        this.rating = 0;
+        this.totalMoney = new BigDecimal("0");
+        this.interestRate = new BigDecimal("0");
         this.id = id;
         this.name = name;
     }

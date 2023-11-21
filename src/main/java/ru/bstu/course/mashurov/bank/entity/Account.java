@@ -1,6 +1,14 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import lombok.Data;
+import lombok.Getter;
+
+import java.util.UUID;
+
+@Data
 public class Account {
+
+    protected UUID id;
 
     private static int currentId;
     protected int id;
@@ -50,35 +58,6 @@ public class Account {
                 bank='%s'
             }
             """.formatted(getId(), getClient(), getBank().getName());
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Client getClient() {
-        return this.client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Bank getBank() {
-        return this.bank;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
-
-    private void initWithDefaults() {
-        client = null;
-        bank = null;
     }
 
 }

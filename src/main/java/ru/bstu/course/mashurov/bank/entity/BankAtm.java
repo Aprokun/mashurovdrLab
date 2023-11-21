@@ -1,10 +1,12 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import lombok.Data;
 import ru.bstu.course.mashurov.bank.entity.values.BankAtmStatusValues;
 import ru.bstu.course.mashurov.bank.service.impl.AtmServiceImpl;
 
 import java.math.BigDecimal;
 
+@Data
 public class BankAtm {
 
     private int id;
@@ -24,6 +26,7 @@ public class BankAtm {
     }
 
     public BankAtm(BankAtm bankAtm) {
+
         this.id = bankAtm.id;
         this.name = bankAtm.name;
         this.address = bankAtm.address;
@@ -40,14 +43,32 @@ public class BankAtm {
     public BankAtm() {
 
         initId();
-        initWithDefaults();
+
+        this.name = "No name";
+        this.address = "No address";
+        this.status = BankAtmStatusValues.NOT_WORKING;
+        this.bank = null;
+        this.bankOffice = null;
+        this.employee = null;
+        this.isCashWithdrawalAvailable = false;
+        this.isCashDepositAvailable = false;
+        this.totalMoney = new BigDecimal("0");
+        this.maintenanceCost = new BigDecimal("0");
     }
 
     public BankAtm(String name, String address) {
 
         initId();
-        initWithDefaults();
 
+        this.id = UUID.randomUUID();
+        this.status = BankAtmStatusValues.NOT_WORKING;
+        this.bank = null;
+        this.bankOffice = null;
+        this.employee = null;
+        this.isCashWithdrawalAvailable = false;
+        this.isCashDepositAvailable = false;
+        this.totalMoney = new BigDecimal("0");
+        this.maintenanceCost = new BigDecimal("0");
         this.name = name;
         this.address = address;
     }
@@ -59,7 +80,6 @@ public class BankAtm {
     ) {
 
         initId();
-        initWithDefaults();
 
         this.name = name;
         this.address = address;
@@ -116,115 +136,4 @@ public class BankAtm {
                 getMaintenanceCost()
             );
     }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public BankAtmStatusValues getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(BankAtmStatusValues status) {
-        this.status = status;
-    }
-
-    public Bank getBank() {
-        return this.bank;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
-
-    public BankOffice getBankOffice() {
-        return this.bankOffice;
-    }
-
-    public void setBankOffice(BankOffice bankOffice) {
-        this.bankOffice = bankOffice;
-    }
-
-    public Employee getEmployee() {
-        return this.employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public boolean isIsCashWithdrawalAvailable() {
-        return this.isCashWithdrawalAvailable;
-    }
-
-    public boolean getIsCashWithdrawalAvailable() {
-        return this.isCashWithdrawalAvailable;
-    }
-
-    public void setIsCashWithdrawalAvailable(boolean isCashWithdrawalAvailable) {
-        this.isCashWithdrawalAvailable = isCashWithdrawalAvailable;
-    }
-
-    public boolean isIsCashDepositAvailable() {
-        return this.isCashDepositAvailable;
-    }
-
-    public boolean getIsCashDepositAvailable() {
-        return this.isCashDepositAvailable;
-    }
-
-    public void setIsCashDepositAvailable(boolean isCashDepositAvailable) {
-        this.isCashDepositAvailable = isCashDepositAvailable;
-    }
-
-    public BigDecimal getTotalMoney() {
-        return this.totalMoney;
-    }
-
-    public void setTotalMoney(BigDecimal totalMoney) {
-        this.totalMoney = totalMoney;
-    }
-
-    public BigDecimal getMaintenanceCost() {
-        return this.maintenanceCost;
-    }
-
-    public void setMaintenanceCost(BigDecimal maintenanceCost) {
-        this.maintenanceCost = maintenanceCost;
-    }
-
-    private void initWithDefaults() {
-
-        name = "No name";
-        address = "No address";
-        status = BankAtmStatusValues.NOT_WORKING;
-        bank = null;
-        bankOffice = null;
-        employee = null;
-        isCashWithdrawalAvailable = false;
-        isCashDepositAvailable = false;
-        totalMoney = new BigDecimal("0");
-        maintenanceCost = new BigDecimal("0");
-    }
-
 }

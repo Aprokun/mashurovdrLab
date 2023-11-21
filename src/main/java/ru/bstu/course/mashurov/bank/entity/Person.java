@@ -1,8 +1,11 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import lombok.Data;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+@Data
 public class Person {
     private static int currentId;
     protected int id;
@@ -16,7 +19,9 @@ public class Person {
     public Person() {
 
         initId();
-        initWithDefaults();
+
+        this.name = "No name";
+        this.birthDate = null;
     }
 
     public Person(Person person) {
@@ -29,17 +34,16 @@ public class Person {
     public Person(String name, LocalDate birthDate) {
 
         initId();
-        initWithDefaults();
 
         this.name = name;
         this.birthdDate = birthDate;
     }
 
-    public Person(int id, String name, LocalDate birthdDate) {
+    public Person(int id, String name, LocalDate birthDate) {
 
         this.id = id;
         this.name = name;
-        this.birthdDate = birthdDate;
+        this.birthdDate = birthDate;
     }
 
     @Override
@@ -52,36 +56,6 @@ public class Person {
                 birthDate='%s'
             }
             """.formatted(getId(), getName(), getBirthdDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDate getBirthdDate() {
-        return this.birthdDate;
-    }
-
-    public void setBirthdDate(LocalDate birthdDate) {
-        this.birthdDate = birthdDate;
-    }
-
-    private void initWithDefaults() {
-
-        name = "No name";
-        birthdDate = null;
     }
 
 }

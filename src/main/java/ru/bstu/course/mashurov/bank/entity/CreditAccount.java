@@ -1,8 +1,11 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Data
 public class CreditAccount extends Account {
 
     private LocalDate dateStart;
@@ -16,9 +19,18 @@ public class CreditAccount extends Account {
     private PaymentAccount paymentAccount;
 
     public CreditAccount() {
+
         super();
-        initWithDefaults();
-    }
+
+        this.dateStart = null;
+        this.dateEnd = null;
+        this.monthCount = 0;
+        this.creditAmount = new BigDecimal("0");
+        this.remainingCreditAmount = new BigDecimal("0");
+        this.montlyPayment = new BigDecimal("0");
+        this.interestRate = new BigDecimal("0");
+        this.employee = null;
+        this.paymentAccount = null;    }
 
     public CreditAccount(CreditAccount creditAccount) {
 
@@ -59,7 +71,6 @@ public class CreditAccount extends Account {
         BigDecimal creditAmount, BigDecimal remainingCreditAmount, BigDecimal montlyPayment,
         BigDecimal interestRate, Employee employee, PaymentAccount paymentAccount
     ) {
-
         super(id, client, bank);
 
         this.dateStart = dateStart;
@@ -83,95 +94,10 @@ public class CreditAccount extends Account {
             ",\n monthCount='" + getMonthCount() + "'" +
             ",\n creditAmount='" + String.format("%.2f", getCreditAmount()) + "'" +
             ",\n remainingCreditAmount='" + String.format("%.2f", getRemainingCreditAmount()) + "'" +
-            ",\n montlyPayment='" + String.format("%.2f", getMonthlyPayment()) + "'" +
+            ",\n montlyPayment='" + String.format("%.2f", getMontlyPayment()) + "'" +
             ",\n interestRate='" + String.format("%.2f", getInterestRate()) + "'" +
             ",\n employee='" + getEmployee() + "'" +
             ",\n paymentAccount='" + getPaymentAccount() + "'" +
             "\n}";
     }
-
-    public LocalDate getDateStart() {
-        return this.dateStart;
-    }
-
-    public void setDateStart(LocalDate dateStart) {
-        this.dateStart = dateStart;
-    }
-
-    public LocalDate getDateEnd() {
-        return this.dateEnd;
-    }
-
-    public void setDateEnd(LocalDate dateEnd) {
-        this.dateEnd = dateEnd;
-    }
-
-    public int getMonthCount() {
-        return this.monthCount;
-    }
-
-    public void setMonthCount(int monthCount) {
-        this.monthCount = monthCount;
-    }
-
-    public BigDecimal getCreditAmount() {
-        return this.creditAmount;
-    }
-
-    public void setCreditAmount(BigDecimal creditAmount) {
-        this.creditAmount = creditAmount;
-    }
-
-    public BigDecimal getRemainingCreditAmount() {
-        return this.remainingCreditAmount;
-    }
-
-    public void setRemainingCreditAmount(BigDecimal remainingCreditAmount) {
-        this.remainingCreditAmount = remainingCreditAmount;
-    }
-
-    public BigDecimal getMonthlyPayment() {
-        return this.montlyPayment;
-    }
-
-    public void setMontlyPayment(BigDecimal montlyPayment) {
-        this.montlyPayment = montlyPayment;
-    }
-
-    public BigDecimal getInterestRate() {
-        return this.interestRate;
-    }
-
-    public void setInterestRate(BigDecimal interestRate) {
-        this.interestRate = interestRate;
-    }
-
-    public Employee getEmployee() {
-        return this.employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public PaymentAccount getPaymentAccount() {
-        return this.paymentAccount;
-    }
-
-    public void setPaymentAccount(PaymentAccount paymentAccount) {
-        this.paymentAccount = paymentAccount;
-    }
-
-    private void initWithDefaults() {
-        dateStart = null;
-        dateEnd = null;
-        monthCount = 0;
-        creditAmount = new BigDecimal("0");
-        remainingCreditAmount = new BigDecimal("0");
-        montlyPayment = new BigDecimal("0");
-        interestRate = new BigDecimal("0");
-        employee = null;
-        paymentAccount = null;
-    }
-
 }

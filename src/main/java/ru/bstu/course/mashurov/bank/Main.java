@@ -2,6 +2,7 @@ package ru.bstu.course.mashurov.bank;
 
 import ru.bstu.course.mashurov.bank.entity.*;
 import ru.bstu.course.mashurov.bank.entity.values.BankAtmStatusValues;
+import ru.bstu.course.mashurov.bank.entity.values.EmployeePostValues;
 import ru.bstu.course.mashurov.bank.service.*;
 import ru.bstu.course.mashurov.bank.service.impl.*;
 
@@ -34,6 +35,7 @@ public class Main {
         createBanks(bankService);
 
         List<Bank> banks = bankService.fetchAll();
+
         createBankOffices(banks, bankOfficeService);
 
         List<BankOffice> offices = bankOfficeService.fetchAll();
