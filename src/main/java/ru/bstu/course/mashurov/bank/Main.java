@@ -1,8 +1,7 @@
 package ru.bstu.course.mashurov.bank;
 
 import ru.bstu.course.mashurov.bank.entity.*;
-import ru.bstu.course.mashurov.bank.entity.values.BankAtmStatusValues;
-import ru.bstu.course.mashurov.bank.entity.values.EmployeePostValues;
+import ru.bstu.course.mashurov.bank.entity.values.BankAtmStatus;
 import ru.bstu.course.mashurov.bank.service.*;
 import ru.bstu.course.mashurov.bank.service.impl.*;
 
@@ -133,7 +132,7 @@ public class Main {
             for (int i = 1; i <= 3; i++) {
                 atmService.create(
                     new BankAtm(
-                        "Atm " + i, office.getAddress(), BankAtmStatusValues.WORKING, office.getBank(), office,
+                        "Atm " + i, office.getAddress(), BankAtmStatus.WORKING, office.getBank(), office,
                         bankOfficeService.getAllEmployeesByOfficeId(office.getId()).get(random.nextInt(bankOfficeService.getAllEmployeesByOfficeId(office.getId()).size())),
                         true, true, new BigDecimal("0"), BigDecimal.valueOf(random.nextDouble() * 25)
                     )
@@ -149,7 +148,7 @@ public class Main {
                 clientService.create(
                     new Client(
                         Utils.getNames()[(random.nextInt(Utils.getNames().length))],
-                        LocalDate.of(random.nextInt(200, 300), random.nextInt(1, 13), random.nextInt(1, 29)),
+                        LocalDate.of(random.nextInt(1990, 2003), random.nextInt(1, 13), random.nextInt(1, 29)),
                         Utils.getWorkPlaces()[random.nextInt(Utils.getWorkPlaces().length)],
                         BigDecimal.valueOf(random.nextDouble() * 10000), bank, new BigDecimal(random.nextInt(10000))
                     )

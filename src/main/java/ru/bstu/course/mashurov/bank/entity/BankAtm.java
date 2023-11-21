@@ -1,7 +1,7 @@
 package ru.bstu.course.mashurov.bank.entity;
 
 import lombok.Data;
-import ru.bstu.course.mashurov.bank.entity.values.BankAtmStatusValues;
+import ru.bstu.course.mashurov.bank.entity.values.BankAtmStatus;
 import ru.bstu.course.mashurov.bank.service.impl.AtmServiceImpl;
 
 import java.math.BigDecimal;
@@ -12,7 +12,7 @@ public class BankAtm {
     private int id;
     private String name;
     private String address;
-    private BankAtmStatusValues status;
+    private BankAtmStatus status;
     private Bank bank;
     private BankOffice bankOffice;
     private Employee employee;
@@ -46,7 +46,7 @@ public class BankAtm {
 
         this.name = "No name";
         this.address = "No address";
-        this.status = BankAtmStatusValues.NOT_WORKING;
+        this.status = BankAtmStatus.NOT_WORKING;
         this.bank = null;
         this.bankOffice = null;
         this.employee = null;
@@ -60,7 +60,7 @@ public class BankAtm {
 
         initId();
 
-        this.status = BankAtmStatusValues.NOT_WORKING;
+        this.status = BankAtmStatus.NOT_WORKING;
         this.bank = null;
         this.bankOffice = null;
         this.employee = null;
@@ -73,9 +73,9 @@ public class BankAtm {
     }
 
     public BankAtm(
-        String name, String address, BankAtmStatusValues status, Bank bank, BankOffice bankOffice,
-        Employee employee, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable, BigDecimal totalMoney,
-        BigDecimal maintenanceCost
+            String name, String address, BankAtmStatus status, Bank bank, BankOffice bankOffice,
+            Employee employee, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable, BigDecimal totalMoney,
+            BigDecimal maintenanceCost
     ) {
 
         initId();
@@ -93,9 +93,9 @@ public class BankAtm {
     }
 
     public BankAtm(
-        int id, String name, String address, BankAtmStatusValues status, Bank bank, BankOffice bankOffice,
-        Employee employee, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable, BigDecimal totalMoney,
-        BigDecimal maintenanceCost
+            int id, String name, String address, BankAtmStatus status, Bank bank, BankOffice bankOffice,
+            Employee employee, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable, BigDecimal totalMoney,
+            BigDecimal maintenanceCost
     ) {
 
         this.id = id;

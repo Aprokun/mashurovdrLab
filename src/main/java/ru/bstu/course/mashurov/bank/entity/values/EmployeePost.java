@@ -1,14 +1,12 @@
 package ru.bstu.course.mashurov.bank.entity.values;
 
-import static ru.bstu.course.mashurov.bank.Utils.random;
-
-public enum EmployeePostValues {
+public enum EmployeePost {
 
     DIRECTOR("director"), OPERATOR("operator"), OFFICE_EMPLOYEE("office employee");
 
     private final String value;
 
-    EmployeePostValues(String value) {
+    EmployeePost(String value) {
         this.value = value;
     }
 

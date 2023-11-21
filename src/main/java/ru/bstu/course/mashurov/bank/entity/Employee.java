@@ -1,7 +1,7 @@
 package ru.bstu.course.mashurov.bank.entity;
 
 import lombok.Data;
-import ru.bstu.course.mashurov.bank.entity.values.EmployeePostValues;
+import ru.bstu.course.mashurov.bank.entity.values.EmployeePost;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 public class Employee extends Person {
 
-    private EmployeePostValues job;
+    private EmployeePost job;
     private Bank bank;
     private boolean isWorkingFromHome;
     private BankOffice bankOffice;
@@ -39,8 +39,8 @@ public class Employee extends Person {
     }
 
     public Employee(
-        String name, LocalDate birthDate, EmployeePostValues job, Bank bank, boolean isWorkingFromHome,
-        BankOffice bankOffice, boolean isCreditAvailable, BigDecimal salary
+            String name, LocalDate birthDate, EmployeePost job, Bank bank, boolean isWorkingFromHome,
+            BankOffice bankOffice, boolean isCreditAvailable, BigDecimal salary
     ) {
 
         super(name, birthDate);
