@@ -8,6 +8,7 @@ import java.util.UUID;
 public class Account {
 
     private static int currentId;
+
     protected int id;
     protected Client client;
     protected Bank bank;
@@ -19,21 +20,21 @@ public class Account {
     public Account() {
 
         initId();
-        client = null;
-        bank = null;
+
+        this.client = null;
+        this.bank = null;
     }
 
     public Account(Client client, Bank bank) {
 
         initId();
 
-        client = null;
-        bank = null;
         this.client = client;
         this.bank = bank;
     }
 
     public Account(int id, Client client, Bank bank) {
+
         this.id = id;
         this.client = client;
         this.bank = bank;

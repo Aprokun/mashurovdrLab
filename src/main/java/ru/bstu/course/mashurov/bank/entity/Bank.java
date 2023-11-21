@@ -6,6 +6,7 @@ import ru.bstu.course.mashurov.bank.service.impl.BankServiceImpl;
 
 import java.math.BigDecimal;
 
+@Data
 public class Bank {
 
     private int id;
