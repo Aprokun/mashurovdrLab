@@ -22,14 +22,24 @@ public class BankOffice {
     private BigDecimal rentPrice;
 
     public BankOffice(String name, String address) {
-        initWithDefaults();
-        this.name = name;
+
+        this.id = UUID.randomUUID();
+        this.bank = null;
+        this.isWorking = false;
+        this.isAtmPlaceable = false;
+        this.atmCount = 0;
+        this.isCreditAvailable = false;
+        this.isCashWithdrawalAvailable = false;
+        this.isCashDepositAvailable = false;
+        this.totalMoney = new BigDecimal("0");
+        this.rentPrice = new BigDecimal("0");        this.name = name;
         this.address = address;
     }
 
     public BankOffice(UUID id, String name, String address, Bank bank, boolean isWorking, boolean isAtmPlaceable,
                       int atmCount, boolean isCreditAvailable, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable,
                       BigDecimal totalMoney, BigDecimal rentPrice) {
+
         this.id = id;
         this.name = name;
         this.address = address;
@@ -47,7 +57,8 @@ public class BankOffice {
     public BankOffice(String name, String address, Bank bank, boolean isWorking, boolean isAtmPlaceable,
                       int atmCount, boolean isCreditAvailable, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable,
                       BigDecimal totalMoney, BigDecimal rentPrice) {
-        initWithDefaults();
+
+        this.id = UUID.randomUUID();
         this.name = name;
         this.address = address;
         this.bank = bank;
@@ -62,6 +73,7 @@ public class BankOffice {
     }
 
     public BankOffice(BankOffice bankOffice) {
+
         this.id = UUID.fromString(bankOffice.id.toString());
         this.name = bankOffice.name;
         this.address = bankOffice.address;
@@ -78,6 +90,7 @@ public class BankOffice {
 
     @Override
     public String toString() {
+
         return "BankOffice:{" +
                 "\n id='" + getId() + "'" +
                 ",\n name='" + getName() + "'" +
@@ -92,20 +105,5 @@ public class BankOffice {
                 ",\n totalMoney='" + String.format("%.2f", getTotalMoney()) + "'" +
                 ",\n rentPrice='" + String.format("%.2f", getRentPrice()) + "'" +
                 "\n}";
-    }
-
-    private void initWithDefaults() {
-        id = UUID.randomUUID();
-        name = "No name";
-        address = "No address";
-        bank = null;
-        isWorking = false;
-        isAtmPlaceable = false;
-        atmCount = 0;
-        isCreditAvailable = false;
-        isCashWithdrawalAvailable = false;
-        isCashDepositAvailable = false;
-        totalMoney = new BigDecimal("0");
-        rentPrice = new BigDecimal("0");
     }
 }

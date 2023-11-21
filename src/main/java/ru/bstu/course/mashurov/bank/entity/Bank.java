@@ -1,10 +1,11 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import static ru.bstu.course.mashurov.bank.Utils.random;
-
+@Data
 public class Bank {
 
     private UUID id;
@@ -83,78 +84,6 @@ public class Bank {
             ",\n totalMoney='" + String.format("%.2f", getTotalMoney()) + "'" +
             ",\n interestRate='" + String.format("%.2f", getInterestRate()) + "'" +
             "\n}";
-    }
-
-    public UUID getId() {
-        return this.id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getOfficeCount() {
-        return this.officeCount;
-    }
-
-    public void setOfficeCount(int officeCount) {
-        this.officeCount = officeCount;
-    }
-
-    public int getAtmCount() {
-        return this.atmCount;
-    }
-
-    public void setAtmCount(int atmCount) {
-        this.atmCount = atmCount;
-    }
-
-    public int getEmployeeCount() {
-        return this.employeeCount;
-    }
-
-    public void setEmployeeCount(int employeeCount) {
-        this.employeeCount = employeeCount;
-    }
-
-    public int getClientCount() {
-        return this.clientCount;
-    }
-
-    public void setClientCount(int clientCount) {
-        this.clientCount = clientCount;
-    }
-
-    public byte getRating() {
-        return this.rating;
-    }
-
-    public void setRating(byte rating) {
-        this.rating = rating;
-    }
-
-    public BigDecimal getTotalMoney() {
-        return this.totalMoney;
-    }
-
-    public void setTotalMoney(BigDecimal totalMoney) {
-        this.totalMoney = totalMoney;
-    }
-
-    public BigDecimal getInterestRate() {
-        return this.interestRate;
-    }
-
-    public void setInterestRate(BigDecimal interestRate) {
-        this.interestRate = interestRate;
     }
 
 }

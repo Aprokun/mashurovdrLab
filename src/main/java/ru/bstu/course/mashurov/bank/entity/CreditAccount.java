@@ -4,7 +4,6 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -83,6 +82,7 @@ public class CreditAccount extends Account {
 
     @Override
     public String toString() {
+
         return "CreditAccount:{" +
                 "\n account='" + super.toString() + "'" +
                 ",\n dateStart='" + getDateStart() + "'" +

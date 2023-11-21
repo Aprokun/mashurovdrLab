@@ -5,7 +5,6 @@ import ru.bstu.course.mashurov.bank.entity.values.EmployeePostValues;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 public class Employee extends Person {
@@ -55,6 +54,7 @@ public class Employee extends Person {
 
     @Override
     public String toString() {
+
         return "Employee:{" +
                 "\n person='" + super.toString() + "'" +
                 ",\n job='" + getJob() + "'" +
