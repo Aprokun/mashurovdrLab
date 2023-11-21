@@ -42,6 +42,7 @@ public class Employee extends Person {
         String name, LocalDate birthDate, EmployeePostValues job, Bank bank, boolean isWorkingFromHome,
         BankOffice bankOffice, boolean isCreditAvailable, BigDecimal salary
     ) {
+
         super(name, birthDate);
 
         this.job = job;

@@ -31,6 +31,7 @@ public class PaymentAccount extends Account {
     }
 
     public PaymentAccount(int id, Client client, Bank bank, BigDecimal balance) {
+
         super(id, client, bank);
 
         this.balance = balance;

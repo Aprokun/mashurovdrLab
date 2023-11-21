@@ -1,7 +1,6 @@
 package ru.bstu.course.mashurov.bank.entity;
 
 import lombok.Data;
-import lombok.Getter;
 
 import java.util.UUID;
 
@@ -27,6 +26,7 @@ public class Account {
     public Account(Client client, Bank bank) {
 
         initId();
+
         client = null;
         bank = null;
         this.client = client;
@@ -34,7 +34,6 @@ public class Account {
     }
 
     public Account(int id, Client client, Bank bank) {
-
         this.id = id;
         this.client = client;
         this.bank = bank;

@@ -7,7 +7,9 @@ import java.time.format.DateTimeFormatter;
 
 @Data
 public class Person {
+
     private static int currentId;
+
     protected int id;
     protected String name;
     protected LocalDate birthDate;

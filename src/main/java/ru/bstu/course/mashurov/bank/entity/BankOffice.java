@@ -29,8 +29,16 @@ public class BankOffice {
     public BankOffice(String name, String address) {
 
         initId();
-        initWithDefaults();
 
+        this.bank = null;
+        this.isWorking = false;
+        this.isAtmPlaceable = false;
+        this.atmCount = 0;
+        this.isCreditAvailable = false;
+        this.isCashWithdrawalAvailable = false;
+        this.isCashDepositAvailable = false;
+        this.totalMoney = new BigDecimal("0");
+        this.rentPrice = new BigDecimal("0");        this.name = name;
         this.name = name;
         this.address = address;
     }
@@ -40,7 +48,6 @@ public class BankOffice {
         int atmCount, boolean isCreditAvailable, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable,
         BigDecimal totalMoney, BigDecimal rentPrice
     ) {
-
         this.id = id;
         this.name = name;
         this.address = address;
@@ -62,7 +69,6 @@ public class BankOffice {
     ) {
 
         initId();
-        initWithDefaults();
 
         this.name = name;
         this.address = address;
@@ -118,20 +124,6 @@ public class BankOffice {
                 isCashDepositAvailable(), getTotalMoney(), getRentPrice()
             );
     }
-
-    private void initWithDefaults() {
-
-        name = "No name";
-        address = "No address";
-        bank = null;
-        isWorking = false;
-        isAtmPlaceable = false;
-        atmCount = 0;
-        isCreditAvailable = false;
-        isCashWithdrawalAvailable = false;
-        isCashDepositAvailable = false;
-        totalMoney = new BigDecimal("0");
-        rentPrice = new BigDecimal("0");
-    }
+}
 
 }

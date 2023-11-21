@@ -1,5 +1,7 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import lombok.Data;
+
 import ru.bstu.course.mashurov.bank.service.impl.BankServiceImpl;
 
 import java.math.BigDecimal;
@@ -94,90 +96,6 @@ public class Bank {
                 getId(), getName(), getOfficeCount(), getAtmCount(), getEmployeeCount(),
                 getClientCount(), getRating(), getTotalMoney(), getInterestRate()
             );
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getOfficeCount() {
-        return this.officeCount;
-    }
-
-    public void setOfficeCount(int officeCount) {
-        this.officeCount = officeCount;
-    }
-
-    public int getAtmCount() {
-        return this.atmCount;
-    }
-
-    public void setAtmCount(int atmCount) {
-        this.atmCount = atmCount;
-    }
-
-    public int getEmployeeCount() {
-        return this.employeeCount;
-    }
-
-    public void setEmployeeCount(int employeeCount) {
-        this.employeeCount = employeeCount;
-    }
-
-    public int getClientCount() {
-        return this.clientCount;
-    }
-
-    public void setClientCount(int clientCount) {
-        this.clientCount = clientCount;
-    }
-
-    public byte getRating() {
-        return this.rating;
-    }
-
-    public void setRating(byte rating) {
-        this.rating = rating;
-    }
-
-    public BigDecimal getTotalMoney() {
-        return this.totalMoney;
-    }
-
-    public void setTotalMoney(BigDecimal totalMoney) {
-        this.totalMoney = totalMoney;
-    }
-
-    public BigDecimal getInterestRate() {
-        return this.interestRate;
-    }
-
-    public void setInterestRate(BigDecimal interestRate) {
-        this.interestRate = interestRate;
-    }
-
-    private void initWithDefaults() {
-
-        name = "No name";
-        officeCount = 0;
-        atmCount = 0;
-        employeeCount = 0;
-        clientCount = 0;
-        rating = 0;
-        totalMoney = new BigDecimal("0");
-        interestRate = new BigDecimal("0");
     }
 
 }
