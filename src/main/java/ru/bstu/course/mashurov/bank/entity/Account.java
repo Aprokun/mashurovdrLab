@@ -8,8 +8,6 @@ import java.util.UUID;
 @Data
 public class Account {
 
-    protected UUID id;
-
     private static int currentId;
     protected int id;
     protected Client client;
@@ -22,14 +20,15 @@ public class Account {
     public Account() {
 
         initId();
-        initWithDefaults();
+        client = null;
+        bank = null;
     }
 
     public Account(Client client, Bank bank) {
 
         initId();
-        initWithDefaults();
-
+        client = null;
+        bank = null;
         this.client = client;
         this.bank = bank;
     }

@@ -20,7 +20,6 @@ public class Bank {
 
         initId();
 
-        this.id = UUID.randomUUID();
         this.name = "No name";
         this.officeCount = 0;
         this.atmCount = 0;

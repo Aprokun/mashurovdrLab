@@ -60,7 +60,6 @@ public class BankAtm {
 
         initId();
 
-        this.id = UUID.randomUUID();
         this.status = BankAtmStatusValues.NOT_WORKING;
         this.bank = null;
         this.bankOffice = null;
@@ -132,7 +131,7 @@ public class BankAtm {
             """
             .formatted(
                 getId(), getName(), getAddress(), getStatus(), getBank().getName(), getBankOffice(),
-                getEmployee(), isIsCashWithdrawalAvailable(), isIsCashDepositAvailable(), getTotalMoney(),
+                getEmployee(), isCashWithdrawalAvailable(), isCashDepositAvailable(), getTotalMoney(),
                 getMaintenanceCost()
             );
     }

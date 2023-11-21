@@ -113,9 +113,9 @@ public class BankOffice {
             }
             """
             .formatted(
-                getId(), getName(), getAddress(), getBank().getName(), isIsWorking(), isIsAtmPlaceable(),
-                getAtmCount(), isIsCreditAvailable(), isIsCashWithdrawalAvailable(),
-                isIsCashDepositAvailable(), getTotalMoney(), getRentPrice()
+                getId(), getName(), getAddress(), getBank().getName(), isWorking(), isAtmPlaceable(),
+                getAtmCount(), isCreditAvailable(), isCashWithdrawalAvailable(),
+                isCashDepositAvailable(), getTotalMoney(), getRentPrice()
             );
     }
 

@@ -15,14 +15,14 @@ public class Client extends Person {
 
     public Client() {
 
-        this.placeOfWork = "No place of work";
+        this.workPlace = "No place of work";
         this.monthlyIncome = new BigDecimal("0");
         this.bank = null;
         this.creditRating = new BigDecimal("0");    }
 
     public Client(Client client) {
 
-        super(client.id, client.name, client.birthdDate);
+        super(client.id, client.name, client.birthDate);
 
         this.workPlace = client.workPlace;
         this.monthlyIncome = client.monthlyIncome;
@@ -37,7 +37,7 @@ public class Client extends Person {
         super(name, birthDate);
 
         this.name = name;
-        this.birthdDate = birthDate;
+        this.birthDate = birthDate;
         this.workPlace = workPlace;
         this.monthlyIncome = monthlyIncome;
         this.bank = bank;

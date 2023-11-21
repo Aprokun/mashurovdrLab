@@ -10,7 +10,7 @@ public class Person {
     private static int currentId;
     protected int id;
     protected String name;
-    protected LocalDate birthdDate;
+    protected LocalDate birthDate;
 
     private void initId() {
         id = currentId++;
@@ -28,7 +28,7 @@ public class Person {
 
         this.id = person.id;
         this.name = person.name;
-        this.birthdDate = person.birthdDate;
+        this.birthDate = person.birthDate;
     }
 
     public Person(String name, LocalDate birthDate) {
@@ -36,14 +36,14 @@ public class Person {
         initId();
 
         this.name = name;
-        this.birthdDate = birthDate;
+        this.birthDate = birthDate;
     }
 
     public Person(int id, String name, LocalDate birthDate) {
 
         this.id = id;
         this.name = name;
-        this.birthdDate = birthDate;
+        this.birthDate = birthDate;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class Person {
                 name='%s',
                 birthDate='%s'
             }
-            """.formatted(getId(), getName(), getBirthdDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+            """.formatted(getId(), getName(), getBirthDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
     }
 
 }

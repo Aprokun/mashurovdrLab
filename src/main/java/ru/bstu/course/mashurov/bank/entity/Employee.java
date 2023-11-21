@@ -29,7 +29,7 @@ public class Employee extends Person {
 
     public Employee(Employee employee) {
 
-        super(employee.id, employee.name, employee.birthdDate);
+        super(employee.id, employee.name, employee.birthDate);
         this.job = employee.job;
         this.bank = new Bank(employee.bank);
         this.isWorkingFromHome = employee.isWorkingFromHome;
@@ -66,8 +66,8 @@ public class Employee extends Person {
                 salary='%.2f'
             }
         """.formatted(
-            super.toString(), getJob(), getBank().getName(), isIsWorkingFromHome(),
-            getBankOffice(), isIsCreditAvailable(), getSalary()
+            super.toString(), getJob(), getBank().getName(), isWorkingFromHome(),
+            getBankOffice(), isCreditAvailable(), getSalary()
         );
     }
 }
