@@ -1,8 +1,11 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 
+@Data
 public class BankOffice {
 
     private UUID id;
@@ -80,131 +83,15 @@ public class BankOffice {
                 ",\n name='" + getName() + "'" +
                 ",\n address='" + getAddress() + "'" +
                 ",\n bank='" + getBank() + "'" +
-                ",\n isWorking='" + isIsWorking() + "'" +
-                ",\n isAtmPlaceable='" + isIsAtmPlaceable() + "'" +
+                ",\n isWorking='" + isWorking + "'" +
+                ",\n isAtmPlaceable='" + isAtmPlaceable + "'" +
                 ",\n atmCount='" + getAtmCount() + "'" +
-                ",\n isCreditAvailable='" + isIsCreditAvailable() + "'" +
-                ",\n isCashWithdrawalAvailable='" + isIsCashWithdrawalAvailable() + "'" +
-                ",\n isCashDepositAvailable='" + isIsCashDepositAvailable() + "'" +
+                ",\n isCreditAvailable='" + isCreditAvailable + "'" +
+                ",\n isCashWithdrawalAvailable='" + isCashWithdrawalAvailable + "'" +
+                ",\n isCashDepositAvailable='" + isCashDepositAvailable + "'" +
                 ",\n totalMoney='" + String.format("%.2f", getTotalMoney()) + "'" +
                 ",\n rentPrice='" + String.format("%.2f", getRentPrice()) + "'" +
                 "\n}";
-    }
-
-    public UUID getId() {
-        return this.id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Bank getBank() {
-        return this.bank;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
-
-    public boolean isIsWorking() {
-        return this.isWorking;
-    }
-
-    public boolean getIsWorking() {
-        return this.isWorking;
-    }
-
-    public void setIsWorking(boolean isWorking) {
-        this.isWorking = isWorking;
-    }
-
-    public boolean isIsAtmPlaceable() {
-        return this.isAtmPlaceable;
-    }
-
-    public boolean getIsAtmPlaceable() {
-        return this.isAtmPlaceable;
-    }
-
-    public void setIsAtmPlaceable(boolean isAtmPlaceable) {
-        this.isAtmPlaceable = isAtmPlaceable;
-    }
-
-    public int getAtmCount() {
-        return this.atmCount;
-    }
-
-    public void setAtmCount(int atmCount) {
-        this.atmCount = atmCount;
-    }
-
-    public boolean isIsCreditAvailable() {
-        return this.isCreditAvailable;
-    }
-
-    public boolean getIsCreditAvailable() {
-        return this.isCreditAvailable;
-    }
-
-    public void setIsCreditAvailable(boolean isCreditAvailable) {
-        this.isCreditAvailable = isCreditAvailable;
-    }
-
-    public boolean isIsCashWithdrawalAvailable() {
-        return this.isCashWithdrawalAvailable;
-    }
-
-    public boolean getIsCashWithdrawalAvailable() {
-        return this.isCashWithdrawalAvailable;
-    }
-
-    public void setIsCashWithdrawalAvailable(boolean isCashWithdrawalAvailable) {
-        this.isCashWithdrawalAvailable = isCashWithdrawalAvailable;
-    }
-
-    public boolean isIsCashDepositAvailable() {
-        return this.isCashDepositAvailable;
-    }
-
-    public boolean getIsCashDepositAvailable() {
-        return this.isCashDepositAvailable;
-    }
-
-    public void setIsCashDepositAvailable(boolean isCashDepositAvailable) {
-        this.isCashDepositAvailable = isCashDepositAvailable;
-    }
-
-    public BigDecimal getTotalMoney() {
-        return this.totalMoney;
-    }
-
-    public void setTotalMoney(BigDecimal totalMoney) {
-        this.totalMoney = totalMoney;
-    }
-
-    public BigDecimal getRentPrice() {
-        return this.rentPrice;
-    }
-
-    public void setRentPrice(BigDecimal rentPrice) {
-        this.rentPrice = rentPrice;
     }
 
     private void initWithDefaults() {

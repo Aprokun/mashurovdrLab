@@ -21,6 +21,13 @@ public class Main {
         System.out.println(bank);
 
         BankOfficeService bankOfficeService = new BankOfficeServiceImpl();
+        EmployeeService employeeService = new EmployeeServiceImpl();
+        AtmService atmService = new AtmServiceImpl();
+        ClientService userService = new ClientServiceImpl();
+        PaymentAccountService paymentAccountService = new PaymentAccountServiceImpl();
+        CreditAccountService creditAccountService = new CreditAccountServiceImpl();
+
+
         BankOffice bankOffice = bankOfficeService.create(
             new BankOffice(
                 "Sbebra Bank Office", "Bebra Street", bank,
@@ -31,7 +38,6 @@ public class Main {
 
         System.out.println(bankOffice);
 
-        EmployeeService employeeService = new EmployeeServiceImpl();
         Employee employee = employeeService.create(
             new Employee(
                 "Dmitriy Dmitriy Dmitriy",
@@ -43,7 +49,6 @@ public class Main {
 
         System.out.println(employee);
 
-        AtmService atmService = new AtmServiceImpl();
         BankAtm bankAtm = atmService.create(
             new BankAtm(
                 "Bebra ATM", bankOffice.getAddress(), BankAtmStatusValues.WORKING, bank,
@@ -53,25 +58,22 @@ public class Main {
         );
         System.out.println(bankAtm);
 
-        ClientService userService = new ClientServiceImpl();
         Client user = userService
-                .create(
-                        new Client(
-                                "Ivan Inva Ivan", LocalDate.of(264, 2, 15),
-                                "Google", new BigDecimal("1000"), bank, new BigDecimal("999999999")
-                        )
-                );
+            .create(
+                new Client(
+                    "Ivan Inva Ivan", LocalDate.of(264, 2, 15),
+                    "Google", new BigDecimal("1000"), bank, new BigDecimal("999999999")
+                )
+            );
 
         System.out.println(user);
 
-        PaymentAccountService paymentAccountService = new PaymentAccountServiceImpl();
         PaymentAccount paymentAccount = paymentAccountService.create(
             new PaymentAccount(user, bank, new BigDecimal("9000"))
         );
 
         System.out.println(paymentAccount);
 
-        CreditAccountService creditAccountService = new CreditAccountServiceImpl();
         CreditAccount creditAccount = creditAccountService.create(
             new CreditAccount(
                 user, bank,

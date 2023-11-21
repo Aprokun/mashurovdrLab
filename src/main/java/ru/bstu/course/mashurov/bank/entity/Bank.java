@@ -7,9 +7,6 @@ import static ru.bstu.course.mashurov.bank.Utils.random;
 
 public class Bank {
 
-    public static final BigDecimal MAX_RATING = new BigDecimal("100");
-    public static final BigDecimal MAX_TOTAL_MONEY = new BigDecimal("1000000");
-    public static final BigDecimal MAX_INTEREST_RATE = new BigDecimal("20");
     private UUID id;
     private String name;
     private int officeCount;
@@ -21,18 +18,20 @@ public class Bank {
     private BigDecimal interestRate;
 
     public Bank() {
-        id = UUID.randomUUID();
-        name = "No name";
-        officeCount = 0;
-        atmCount = 0;
-        employeeCount = 0;
-        clientCount = 0;
-        rating = 0;
-        totalMoney = new BigDecimal("0");
-        interestRate = new BigDecimal("0");
+
+        this.id = UUID.randomUUID();
+        this.name = "No name";
+        this.officeCount = 0;
+        this.atmCount = 0;
+        this.employeeCount = 0;
+        this.clientCount = 0;
+        this.rating = 0;
+        this.totalMoney = new BigDecimal("0");
+        this.interestRate = new BigDecimal("0");
     }
 
     public Bank(Bank bank) {
+
         this.id = UUID.fromString(bank.id.toString());
         this.name = bank.name;
         this.officeCount = bank.officeCount;
@@ -45,21 +44,20 @@ public class Bank {
     }
 
     public Bank(String name) {
-        id = UUID.randomUUID();
-        name = "No name";
-        officeCount = 0;
-        atmCount = 0;
-        employeeCount = 0;
-        clientCount = 0;
-        rating = 0;
-        totalMoney = new BigDecimal("0");
-        interestRate = new BigDecimal("0");
+
+        this.id = UUID.randomUUID();
+        this.officeCount = 0;
+        this.atmCount = 0;
+        this.employeeCount = 0;
+        this.clientCount = 0;
+        this.rating = 0;
+        this.totalMoney = new BigDecimal("0");
+        this.interestRate = new BigDecimal("0");
         this.name = name;
     }
 
     public Bank(UUID id, String name) {
-        this.id = UUID.randomUUID();
-        this.name = "No name";
+
         this.officeCount = 0;
         this.atmCount = 0;
         this.employeeCount = 0;
@@ -73,6 +71,7 @@ public class Bank {
 
     @Override
     public String toString() {
+
         return "Bank:{" +
             "\n id='" + getId() + "'" +
             ",\n name='" + getName() + "'" +

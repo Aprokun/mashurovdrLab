@@ -1,9 +1,12 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
+@Data
 public class Client extends Person {
 
     public static final BigDecimal MAX_MONTHLY_INCOME = new BigDecimal("10000");
@@ -13,11 +16,16 @@ public class Client extends Person {
     private BigDecimal creditRating;
 
     public Client() {
-        initWithDefaults();
-    }
+
+        this.placeOfWork = "No place of work";
+        this.monthlyIncome = new BigDecimal("0");
+        this.bank = null;
+        this.creditRating = new BigDecimal("0");    }
 
     public Client(Client client) {
+
         super(client.id, client.name, client.birthDate);
+
         this.placeOfWork = client.placeOfWork;
         this.monthlyIncome = client.monthlyIncome;
         this.bank = new Bank(client.bank);
@@ -26,7 +34,7 @@ public class Client extends Person {
 
     public Client(String name, LocalDate birthDate, String placeOfWork, BigDecimal monthlyIncome, Bank bank,
                   BigDecimal creditRating) {
-        initWithDefaults();
+
         this.name = name;
         this.birthDate = birthDate;
         this.placeOfWork = placeOfWork;
@@ -37,6 +45,7 @@ public class Client extends Person {
 
     public Client(UUID id, String name, LocalDate birthDate, String placeOfWork, BigDecimal monthlyIncome, Bank bank,
                   BigDecimal creditRating) {
+
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
@@ -55,45 +64,6 @@ public class Client extends Person {
                 ",\n bank='" + getBank() + "'" +
                 ",\n creditRating='" + String.format("%.2f", getCreditRating()) + "'" +
                 "\n}";
-    }
-
-    public String getPlaceOfWork() {
-        return this.placeOfWork;
-    }
-
-    public void setPlaceOfWork(String placeOfWork) {
-        this.placeOfWork = placeOfWork;
-    }
-
-    public BigDecimal getMonthlyIncome() {
-        return this.monthlyIncome;
-    }
-
-    public void setMonthlyIncome(BigDecimal monthlyIncome) {
-        this.monthlyIncome = monthlyIncome;
-    }
-
-    public Bank getBank() {
-        return this.bank;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
-
-    public BigDecimal getCreditRating() {
-        return this.creditRating;
-    }
-
-    public void setCreditRating(BigDecimal creditRating) {
-        this.creditRating = creditRating;
-    }
-
-    private void initWithDefaults() {
-        placeOfWork = "No place of work";
-        monthlyIncome = new BigDecimal("0");
-        bank = null;
-        creditRating = new BigDecimal("0");
     }
 
 }

@@ -1,8 +1,13 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import lombok.Data;
+import lombok.Getter;
+
 import java.util.UUID;
 
+@Data
 public class Account {
+
     protected UUID id;
     protected Client client;
     protected Bank bank;
@@ -38,30 +43,6 @@ public class Account {
                 ",\n client='" + getClient() + "'" +
                 ",\n bank='" + getBank() + "'" +
                 "\n}";
-    }
-
-    public UUID getId() {
-        return this.id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public Client getClient() {
-        return this.client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Bank getBank() {
-        return this.bank;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
     }
 
 }

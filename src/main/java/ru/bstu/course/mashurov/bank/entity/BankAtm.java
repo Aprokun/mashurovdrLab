@@ -1,10 +1,12 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import lombok.Data;
 import ru.bstu.course.mashurov.bank.entity.values.BankAtmStatusValues;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
+@Data
 public class BankAtm {
 
     private UUID id;
@@ -20,6 +22,7 @@ public class BankAtm {
     private BigDecimal maintenanceCost;
 
     public BankAtm(BankAtm bankAtm) {
+
         this.id = UUID.fromString(bankAtm.id.toString());
         this.name = bankAtm.name;
         this.address = bankAtm.address;
@@ -34,11 +37,31 @@ public class BankAtm {
     }
 
     public BankAtm() {
-        initWithDefaults();
+
+        this.id = UUID.randomUUID();
+        this.name = "No name";
+        this.address = "No address";
+        this.status = BankAtmStatusValues.NOT_WORKING;
+        this.bank = null;
+        this.bankOffice = null;
+        this.employee = null;
+        this.isCashWithdrawalAvailable = false;
+        this.isCashDepositAvailable = false;
+        this.totalMoney = new BigDecimal("0");
+        this.maintenanceCost = new BigDecimal("0");
     }
 
     public BankAtm(String name, String address) {
-        initWithDefaults();
+
+        this.id = UUID.randomUUID();
+        this.status = BankAtmStatusValues.NOT_WORKING;
+        this.bank = null;
+        this.bankOffice = null;
+        this.employee = null;
+        this.isCashWithdrawalAvailable = false;
+        this.isCashDepositAvailable = false;
+        this.totalMoney = new BigDecimal("0");
+        this.maintenanceCost = new BigDecimal("0");
         this.name = name;
         this.address = address;
     }
@@ -46,7 +69,8 @@ public class BankAtm {
     public BankAtm(String name, String address, BankAtmStatusValues status, Bank bank, BankOffice bankOffice,
                    Employee employee, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable, BigDecimal totalMoney,
                    BigDecimal maintenanceCost) {
-        initWithDefaults();
+
+        this.id = UUID.randomUUID();
         this.name = name;
         this.address = address;
         this.status = status;
@@ -78,127 +102,17 @@ public class BankAtm {
     @Override
     public String toString() {
         return "BankAtm:{" +
-                "\n id='" + getId() + "'" +
-                ",\n name='" + getName() + "'" +
-                ",\n address='" + getAddress() + "'" +
-                ",\n status='" + getStatus() + "'" +
-                ",\n bank='" + getBank() + "'" +
-                ",\n bankOffice='" + getBankOffice() + "'" +
-                ",\n employee='" + getEmployee() + "'" +
-                ",\n isCashWithdrawalAvailable='" + isIsCashWithdrawalAvailable() + "'" +
-                ",\n isCashDepositAvailable='" + isIsCashDepositAvailable() + "'" +
-                ",\n totalMoney='" + String.format("%.2f", getTotalMoney()) + "'" +
-                ",\n maintenanceCost='" + String.format("%.2f", getMaintenanceCost()) + "'" +
-                "\n}";
-    }
-
-    public UUID getId() {
-        return this.id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public BankAtmStatusValues getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(BankAtmStatusValues status) {
-        this.status = status;
-    }
-
-    public Bank getBank() {
-        return this.bank;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
-
-    public BankOffice getBankOffice() {
-        return this.bankOffice;
-    }
-
-    public void setBankOffice(BankOffice bankOffice) {
-        this.bankOffice = bankOffice;
-    }
-
-    public Employee getEmployee() {
-        return this.employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public boolean isIsCashWithdrawalAvailable() {
-        return this.isCashWithdrawalAvailable;
-    }
-
-    public boolean getIsCashWithdrawalAvailable() {
-        return this.isCashWithdrawalAvailable;
-    }
-
-    public void setIsCashWithdrawalAvailable(boolean isCashWithdrawalAvailable) {
-        this.isCashWithdrawalAvailable = isCashWithdrawalAvailable;
-    }
-
-    public boolean isIsCashDepositAvailable() {
-        return this.isCashDepositAvailable;
-    }
-
-    public boolean getIsCashDepositAvailable() {
-        return this.isCashDepositAvailable;
-    }
-
-    public void setIsCashDepositAvailable(boolean isCashDepositAvailable) {
-        this.isCashDepositAvailable = isCashDepositAvailable;
-    }
-
-    public BigDecimal getTotalMoney() {
-        return this.totalMoney;
-    }
-
-    public void setTotalMoney(BigDecimal totalMoney) {
-        this.totalMoney = totalMoney;
-    }
-
-    public BigDecimal getMaintenanceCost() {
-        return this.maintenanceCost;
-    }
-
-    public void setMaintenanceCost(BigDecimal maintenanceCost) {
-        this.maintenanceCost = maintenanceCost;
-    }
-
-    private void initWithDefaults() {
-        id = UUID.randomUUID();
-        name = "No name";
-        address = "No address";
-        status = BankAtmStatusValues.NOT_WORKING;
-        bank = null;
-        bankOffice = null;
-        employee = null;
-        isCashWithdrawalAvailable = false;
-        isCashDepositAvailable = false;
-        totalMoney = new BigDecimal("0");
-        maintenanceCost = new BigDecimal("0");
+            "\n id='" + getId() + "'" +
+            ",\n name='" + getName() + "'" +
+            ",\n address='" + getAddress() + "'" +
+            ",\n status='" + getStatus() + "'" +
+            ",\n bank='" + getBank() + "'" +
+            ",\n bankOffice='" + getBankOffice() + "'" +
+            ",\n employee='" + getEmployee() + "'" +
+            ",\n isCashWithdrawalAvailable='" + isCashWithdrawalAvailable() + "'" +
+            ",\n isCashDepositAvailable='" + isCashDepositAvailable() + "'" +
+            ",\n totalMoney='" + String.format("%.2f", getTotalMoney()) + "'" +
+            ",\n maintenanceCost='" + String.format("%.2f", getMaintenanceCost()) + "'" +
+            "\n}";
     }
 }
