@@ -21,7 +21,15 @@ public class Bank {
     private BigDecimal interestRate;
 
     public Bank() {
-        initWithDefaults();
+        id = UUID.randomUUID();
+        name = "No name";
+        officeCount = 0;
+        atmCount = 0;
+        employeeCount = 0;
+        clientCount = 0;
+        rating = 0;
+        totalMoney = new BigDecimal("0");
+        interestRate = new BigDecimal("0");
     }
 
     public Bank(Bank bank) {
@@ -37,12 +45,28 @@ public class Bank {
     }
 
     public Bank(String name) {
-        initWithDefaults();
+        id = UUID.randomUUID();
+        name = "No name";
+        officeCount = 0;
+        atmCount = 0;
+        employeeCount = 0;
+        clientCount = 0;
+        rating = 0;
+        totalMoney = new BigDecimal("0");
+        interestRate = new BigDecimal("0");
         this.name = name;
     }
 
     public Bank(UUID id, String name) {
-        initWithDefaults();
+        this.id = UUID.randomUUID();
+        this.name = "No name";
+        this.officeCount = 0;
+        this.atmCount = 0;
+        this.employeeCount = 0;
+        this.clientCount = 0;
+        this.rating = 0;
+        this.totalMoney = new BigDecimal("0");
+        this.interestRate = new BigDecimal("0");
         this.id = id;
         this.name = name;
     }
@@ -50,16 +74,16 @@ public class Bank {
     @Override
     public String toString() {
         return "Bank:{" +
-                "\n id='" + getId() + "'" +
-                ",\n name='" + getName() + "'" +
-                ",\n officeCount='" + getOfficeCount() + "'" +
-                ",\n atmCount='" + getAtmCount() + "'" +
-                ",\n employeeCount='" + getEmployeeCount() + "'" +
-                ",\n clientCount='" + getClientCount() + "'" +
-                ",\n rating='" + getRating() + "'" +
-                ",\n totalMoney='" + String.format("%.2f", getTotalMoney()) + "'" +
-                ",\n interestRate='" + String.format("%.2f", getInterestRate()) + "'" +
-                "\n}";
+            "\n id='" + getId() + "'" +
+            ",\n name='" + getName() + "'" +
+            ",\n officeCount='" + getOfficeCount() + "'" +
+            ",\n atmCount='" + getAtmCount() + "'" +
+            ",\n employeeCount='" + getEmployeeCount() + "'" +
+            ",\n clientCount='" + getClientCount() + "'" +
+            ",\n rating='" + getRating() + "'" +
+            ",\n totalMoney='" + String.format("%.2f", getTotalMoney()) + "'" +
+            ",\n interestRate='" + String.format("%.2f", getInterestRate()) + "'" +
+            "\n}";
     }
 
     public UUID getId() {
@@ -134,15 +158,4 @@ public class Bank {
         this.interestRate = interestRate;
     }
 
-    private void initWithDefaults() {
-        id = UUID.randomUUID();
-        name = "No name";
-        officeCount = 0;
-        atmCount = 0;
-        employeeCount = 0;
-        clientCount = 0;
-        rating = 0;
-        totalMoney = new BigDecimal("0");
-        interestRate = new BigDecimal("0");
-    }
 }

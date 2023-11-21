@@ -8,11 +8,14 @@ public class Account {
     protected Bank bank;
 
     public Account() {
-        initWithDefaults();
-    }
+        id = UUID.randomUUID();
+        client = null;
+        bank = null;    }
 
     public Account(Client client, Bank bank) {
-        initWithDefaults();
+        id = UUID.randomUUID();
+        client = null;
+        bank = null;
         this.bank = bank;
     }
 
@@ -59,12 +62,6 @@ public class Account {
 
     public void setBank(Bank bank) {
         this.bank = bank;
-    }
-
-    private void initWithDefaults() {
-        id = UUID.randomUUID();
-        client = null;
-        bank = null;
     }
 
 }
