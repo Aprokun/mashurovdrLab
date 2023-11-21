@@ -2,14 +2,12 @@ package ru.bstu.course.mashurov.bank;
 
 import ru.bstu.course.mashurov.bank.entity.*;
 import ru.bstu.course.mashurov.bank.entity.values.BankAtmStatusValues;
-import ru.bstu.course.mashurov.bank.entity.values.BankOfficeStatusValues;
 import ru.bstu.course.mashurov.bank.entity.values.EmployeePostValues;
 import ru.bstu.course.mashurov.bank.service.*;
 import ru.bstu.course.mashurov.bank.service.impl.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Main {
 
@@ -76,8 +74,7 @@ public class Main {
 
         CreditAccount creditAccount = creditAccountService.create(
             new CreditAccount(
-                user, bank,
-                LocalDate.of(298, 1, 1), LocalDate.of(302, 1, 1),
+                user, bank, LocalDate.of(298, 1, 1), LocalDate.of(302, 1, 1),
                 48, new BigDecimal("29000"), new BigDecimal("29000"),
                 new BigDecimal("100"), new BigDecimal("2"), employee, paymentAccount
             )
