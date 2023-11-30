@@ -210,7 +210,7 @@ public class BankOfficeServiceImpl implements BankOfficeService {
 
     @Override
     public boolean isSuitableBankOffice(BankOffice bankOffice, BigDecimal money) throws Exception {
-        if (bankOffice.getIsWorking() && bankOffice.getIsCashWithdrawalAvailable()
+        if (bankOffice.isWorking() && bankOffice.isCashWithdrawalAvailable()
             && bankOffice.getTotalMoney().compareTo(money) >= 0) {
             List<BankAtm> bankAtmSuitable = getSuitableBankAtmInOffice(bankOffice, money);
             if (bankAtmSuitable.isEmpty()) {
