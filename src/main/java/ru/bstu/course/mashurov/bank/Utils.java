@@ -1,6 +1,6 @@
 package ru.bstu.course.mashurov.bank;
 
-import ru.bstu.course.mashurov.bank.entity.values.EmployeePostValues;
+import ru.bstu.course.mashurov.bank.entity.values.EmployeePost;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -24,10 +24,10 @@ public class Utils {
             "Алексеев Станислав Сергеевич", "Макарова Вера Артемовна"
     };
 
-    public static EmployeePostValues getRandomEmployee() {
+    public static EmployeePost getRandomEmployee() {
 
-        EmployeePostValues[] employeePostValues = new EmployeePostValues[]{
-            EmployeePostValues.DIRECTOR, EmployeePostValues.OPERATOR, EmployeePostValues.OFFICE_EMPLOYEE
+        EmployeePost[] employeePostValues = new EmployeePost[]{
+            EmployeePost.DIRECTOR, EmployeePost.OPERATOR, EmployeePost.OFFICE_EMPLOYEE
         };
 
         return employeePostValues[random.nextInt(employeePostValues.length)];

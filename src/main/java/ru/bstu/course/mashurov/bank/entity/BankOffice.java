@@ -2,8 +2,11 @@ package ru.bstu.course.mashurov.bank.entity;
 
 import ru.bstu.course.mashurov.bank.service.impl.BankOfficeServiceImpl;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 
+@Data
 public class BankOffice {
 
     private int id;
@@ -26,8 +29,16 @@ public class BankOffice {
     public BankOffice(String name, String address) {
 
         initId();
-        initWithDefaults();
 
+        this.bank = null;
+        this.isWorking = false;
+        this.isAtmPlaceable = false;
+        this.atmCount = 0;
+        this.isCreditAvailable = false;
+        this.isCashWithdrawalAvailable = false;
+        this.isCashDepositAvailable = false;
+        this.totalMoney = new BigDecimal("0");
+        this.rentPrice = new BigDecimal("0");        this.name = name;
         this.name = name;
         this.address = address;
     }
@@ -37,7 +48,6 @@ public class BankOffice {
         int atmCount, boolean isCreditAvailable, boolean isCashWithdrawalAvailable, boolean isCashDepositAvailable,
         BigDecimal totalMoney, BigDecimal rentPrice
     ) {
-
         this.id = id;
         this.name = name;
         this.address = address;
@@ -59,7 +69,6 @@ public class BankOffice {
     ) {
 
         initId();
-        initWithDefaults();
 
         this.name = name;
         this.address = address;
@@ -94,157 +103,24 @@ public class BankOffice {
     public String toString() {
 
         return """
-            BankOffice:{
-                id='%s',
-                name='%s',
-                address='%s',
-                bank='%s',
-                isWorking='%s',
-                isAtmPlaceable='%s',
-                atmCount='%s',
-                isCreditAvailable='%s',
-                isCashWithdrawalAvailable='%s',
-                isCashDepositAvailable='%s',
-                totalMoney='%.2f',
-                rentPrice='%.2f'
-            }
+            BankOffice:
+                id = '%s',
+                name = '%s',
+                address = '%s',
+                bank = '%s',
+                isWorking = '%s',
+                isAtmPlaceable = '%s',
+                atmCount = '%s',
+                isCreditAvailable = '%s',
+                isCashWithdrawalAvailable = '%s',
+                isCashDepositAvailable = '%s',
+                totalMoney = '%.2f',
+                rentPrice = '%.2f'
             """
             .formatted(
-                getId(), getName(), getAddress(), getBank().getName(), isIsWorking(), isIsAtmPlaceable(),
-                getAtmCount(), isIsCreditAvailable(), isIsCashWithdrawalAvailable(),
-                isIsCashDepositAvailable(), getTotalMoney(), getRentPrice()
+                getId(), getName(), getAddress(), getBank().getName(), isWorking(), isAtmPlaceable(),
+                getAtmCount(), isCreditAvailable(), isCashWithdrawalAvailable(),
+                isCashDepositAvailable(), getTotalMoney(), getRentPrice()
             );
     }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Bank getBank() {
-        return this.bank;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
-
-    public boolean isIsWorking() {
-        return this.isWorking;
-    }
-
-    public boolean getIsWorking() {
-        return this.isWorking;
-    }
-
-    public void setIsWorking(boolean isWorking) {
-        this.isWorking = isWorking;
-    }
-
-    public boolean isIsAtmPlaceable() {
-        return this.isAtmPlaceable;
-    }
-
-    public boolean getIsAtmPlaceable() {
-        return this.isAtmPlaceable;
-    }
-
-    public void setIsAtmPlaceable(boolean isAtmPlaceable) {
-        this.isAtmPlaceable = isAtmPlaceable;
-    }
-
-    public int getAtmCount() {
-        return this.atmCount;
-    }
-
-    public void setAtmCount(int atmCount) {
-        this.atmCount = atmCount;
-    }
-
-    public boolean isIsCreditAvailable() {
-        return this.isCreditAvailable;
-    }
-
-    public boolean getIsCreditAvailable() {
-        return this.isCreditAvailable;
-    }
-
-    public void setIsCreditAvailable(boolean isCreditAvailable) {
-        this.isCreditAvailable = isCreditAvailable;
-    }
-
-    public boolean isIsCashWithdrawalAvailable() {
-        return this.isCashWithdrawalAvailable;
-    }
-
-    public boolean getIsCashWithdrawalAvailable() {
-        return this.isCashWithdrawalAvailable;
-    }
-
-    public void setIsCashWithdrawalAvailable(boolean isCashWithdrawalAvailable) {
-        this.isCashWithdrawalAvailable = isCashWithdrawalAvailable;
-    }
-
-    public boolean isIsCashDepositAvailable() {
-        return this.isCashDepositAvailable;
-    }
-
-    public boolean getIsCashDepositAvailable() {
-        return this.isCashDepositAvailable;
-    }
-
-    public void setIsCashDepositAvailable(boolean isCashDepositAvailable) {
-        this.isCashDepositAvailable = isCashDepositAvailable;
-    }
-
-    public BigDecimal getTotalMoney() {
-        return this.totalMoney;
-    }
-
-    public void setTotalMoney(BigDecimal totalMoney) {
-        this.totalMoney = totalMoney;
-    }
-
-    public BigDecimal getRentPrice() {
-        return this.rentPrice;
-    }
-
-    public void setRentPrice(BigDecimal rentPrice) {
-        this.rentPrice = rentPrice;
-    }
-
-    private void initWithDefaults() {
-
-        name = "No name";
-        address = "No address";
-        bank = null;
-        isWorking = false;
-        isAtmPlaceable = false;
-        atmCount = 0;
-        isCreditAvailable = false;
-        isCashWithdrawalAvailable = false;
-        isCashDepositAvailable = false;
-        totalMoney = new BigDecimal("0");
-        rentPrice = new BigDecimal("0");
-    }
-
 }

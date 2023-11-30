@@ -32,7 +32,7 @@ public class BankOfficeValidator  {
 
     public static boolean validateInstallAtm(BankOffice bankOffice) {
 
-        if (!bankOffice.getIsAtmPlaceable()) {
+        if (!bankOffice.isAtmPlaceable()) {
             System.err.println("Error: BankOffice - cannot install atm");
             return true;
         }
@@ -62,7 +62,7 @@ public class BankOfficeValidator  {
             return true;
         }
 
-        if (!bankOffice.getIsCashDepositAvailable()) {
+        if (!bankOffice.isCashDepositAvailable()) {
             System.err.println("Error: BankOffice - cannot deposit money - office cannot accept deposit");
             return true;
         }
@@ -82,7 +82,7 @@ public class BankOfficeValidator  {
             return true;
         }
 
-        if (!bankOffice.getIsCashWithdrawalAvailable()) {
+        if (!bankOffice.isCashWithdrawalAvailable()) {
             System.err.println("Error: BankOffice - cannot withdraw money - office cannot give withdrawal");
             return true;
         }

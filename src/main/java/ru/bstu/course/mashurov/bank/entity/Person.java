@@ -1,13 +1,18 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import lombok.Data;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+@Data
 public class Person {
+
     private static int currentId;
+
     protected int id;
     protected String name;
-    protected LocalDate birthdDate;
+    protected LocalDate birthDate;
 
     private void initId() {
         id = currentId++;
@@ -16,72 +21,42 @@ public class Person {
     public Person() {
 
         initId();
-        initWithDefaults();
+
+        this.name = "No name";
+        this.birthDate = null;
     }
 
     public Person(Person person) {
 
         this.id = person.id;
         this.name = person.name;
-        this.birthdDate = person.birthdDate;
+        this.birthDate = person.birthDate;
     }
 
     public Person(String name, LocalDate birthDate) {
 
         initId();
-        initWithDefaults();
 
         this.name = name;
-        this.birthdDate = birthDate;
+        this.birthDate = birthDate;
     }
 
-    public Person(int id, String name, LocalDate birthdDate) {
+    public Person(int id, String name, LocalDate birthDate) {
 
         this.id = id;
         this.name = name;
-        this.birthdDate = birthdDate;
+        this.birthDate = birthDate;
     }
 
     @Override
     public String toString() {
 
         return """
-            Person:{
-                id='%s',
-                name='%s',
-                birthDate='%s'
-            }
-            """.formatted(getId(), getName(), getBirthdDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDate getBirthdDate() {
-        return this.birthdDate;
-    }
-
-    public void setBirthdDate(LocalDate birthdDate) {
-        this.birthdDate = birthdDate;
-    }
-
-    private void initWithDefaults() {
-
-        name = "No name";
-        birthdDate = null;
+            Person:
+                id = '%s',
+                name = '%s',
+                birthDate = '%s'
+            """.formatted(getId(), getName(), getBirthDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
     }
 
 }

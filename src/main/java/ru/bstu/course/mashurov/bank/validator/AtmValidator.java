@@ -18,7 +18,7 @@ public class AtmValidator {
             return true;
         }
 
-        if (!bankAtm.getIsCashDepositAvailable()) {
+        if (!bankAtm.isCashDepositAvailable()) {
             System.err.println("Error: BankAtm cannot deposit money - deposit is not allowed");
             return true;
         }
@@ -38,7 +38,7 @@ public class AtmValidator {
             return true;
         }
 
-        if (!bankAtm.getIsCashDepositAvailable()) {
+        if (!bankAtm.isCashDepositAvailable()) {
             System.err.println("Error: BankAtm cannot withdraw money - deposit is not allowed");
             return true;
         }

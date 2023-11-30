@@ -1,8 +1,14 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import lombok.Data;
+
+import java.util.UUID;
+
+@Data
 public class Account {
 
     private static int currentId;
+
     protected int id;
     protected Client client;
     protected Bank bank;
@@ -14,13 +20,14 @@ public class Account {
     public Account() {
 
         initId();
-        initWithDefaults();
+
+        this.client = null;
+        this.bank = null;
     }
 
     public Account(Client client, Bank bank) {
 
         initId();
-        initWithDefaults();
 
         this.client = client;
         this.bank = bank;
@@ -50,35 +57,6 @@ public class Account {
                 bank='%s'
             }
             """.formatted(getId(), getClient(), getBank().getName());
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Client getClient() {
-        return this.client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Bank getBank() {
-        return this.bank;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
-
-    private void initWithDefaults() {
-        client = null;
-        bank = null;
     }
 
 }

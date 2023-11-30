@@ -65,7 +65,7 @@ public class CreditAccountServiceImpl implements CreditAccountService {
 
         if (CreditAccountValidator.validateMakingMonthlyPayment(creditAccount)) return false;
 
-        final BigDecimal monthlyPayment = creditAccount.getMonthlyPayment();
+        final BigDecimal monthlyPayment = creditAccount.getMontlyPayment();
         final BigDecimal paymentAccountBalance = creditAccount.getPaymentAccount().getBalance();
 
         if (paymentAccountBalance.compareTo(monthlyPayment) < 0) {

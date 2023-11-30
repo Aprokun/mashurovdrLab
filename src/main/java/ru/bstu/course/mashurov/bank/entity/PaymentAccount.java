@@ -1,7 +1,10 @@
 package ru.bstu.course.mashurov.bank.entity;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 
+@Data
 public class PaymentAccount extends Account {
 
     private BigDecimal balance;
@@ -9,7 +12,8 @@ public class PaymentAccount extends Account {
     public PaymentAccount() {
 
         super();
-        initWithDefaults();
+
+        this.balance = new BigDecimal("0");
     }
 
     public PaymentAccount(PaymentAccount paymentAccount) {
@@ -37,23 +41,10 @@ public class PaymentAccount extends Account {
     public String toString() {
 
         return """
-            PaymentAccount:{
-                account='%s',
-                balance='%.2f'
-            }
+            PaymentAccount:
+                account = '%s',
+                balance = '%.2f'
             """.formatted(super.toString(), getBalance());
-    }
-
-    public BigDecimal getBalance() {
-        return this.balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
-
-    private void initWithDefaults() {
-        balance = new BigDecimal("0");
     }
 
 }
