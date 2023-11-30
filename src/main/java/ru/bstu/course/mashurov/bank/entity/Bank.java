@@ -81,17 +81,16 @@ public class Bank {
     public String toString() {
 
         return """
-            Bank:{
-                id='%s',
-                name='%s',
-                officeCount='%s',
-                atmCount='%s',
-                employeeCount='%s',
-                clientCount='%s',
-                rating='%s',
-                totalMoney='%.2f',
-                interestRate='%.2f'
-            }
+            Bank:
+                id = '%s',
+                name = '%s',
+                officeCount = '%s',
+                atmCount = '%s',
+                employeeCount = '%s',
+                clientCount = '%s',
+                rating = '%s',
+                totalMoney = '%.2f',
+                interestRate = '%.2f'
             """
             .formatted(
                 getId(), getName(), getOfficeCount(), getAtmCount(), getEmployeeCount(),

@@ -30,7 +30,8 @@ public class CreditAccount extends Account {
         this.montlyPayment = new BigDecimal("0");
         this.interestRate = new BigDecimal("0");
         this.employee = null;
-        this.paymentAccount = null;    }
+        this.paymentAccount = null;
+    }
 
     public CreditAccount(CreditAccount creditAccount) {
 
@@ -87,17 +88,22 @@ public class CreditAccount extends Account {
     @Override
     public String toString() {
 
-        return "CreditAccount:{" +
-            "\n account='" + super.toString() + "'" +
-            ",\n dateStart='" + getDateStart() + "'" +
-            ",\n dateEnd='" + getDateEnd() + "'" +
-            ",\n monthCount='" + getMonthCount() + "'" +
-            ",\n creditAmount='" + String.format("%.2f", getCreditAmount()) + "'" +
-            ",\n remainingCreditAmount='" + String.format("%.2f", getRemainingCreditAmount()) + "'" +
-            ",\n montlyPayment='" + String.format("%.2f", getMontlyPayment()) + "'" +
-            ",\n interestRate='" + String.format("%.2f", getInterestRate()) + "'" +
-            ",\n employee='" + getEmployee() + "'" +
-            ",\n paymentAccount='" + getPaymentAccount() + "'" +
-            "\n}";
+        return """
+            CreditAccount:
+                account = '%s',
+                dateStart = '%s',
+                dateEnd = '%s',
+                monthCount = '%s',
+                creditAmount = '%.2f',
+                remainingCreditAmount = '%.2f',
+                montlyPayment = '%.2f',
+                interestRate = '%.2f',
+                employee = '%s',
+                paymentAccount = '%s'
+            """.formatted(
+                    super.toString(), getDateStart(), getDateEnd(), getMonthCount(), getCreditAmount(),
+                    getRemainingCreditAmount(), getMontlyPayment(), getInterestRate(), getEmployee(),
+                    getPaymentAccount()
+                );
     }
 }

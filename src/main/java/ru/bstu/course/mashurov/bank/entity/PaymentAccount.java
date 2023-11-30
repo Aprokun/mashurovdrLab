@@ -41,10 +41,9 @@ public class PaymentAccount extends Account {
     public String toString() {
 
         return """
-            PaymentAccount:{
-                account='%s',
-                balance='%.2f'
-            }
+            PaymentAccount:
+                account = '%s',
+                balance = '%.2f'
             """.formatted(super.toString(), getBalance());
     }
 

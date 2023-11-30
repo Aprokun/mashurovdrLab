@@ -52,11 +52,10 @@ public class Person {
     public String toString() {
 
         return """
-            Person:{
-                id='%s',
-                name='%s',
-                birthDate='%s'
-            }
+            Person:
+                id = '%s',
+                name = '%s',
+                birthDate = '%s'
             """.formatted(getId(), getName(), getBirthDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
     }
 

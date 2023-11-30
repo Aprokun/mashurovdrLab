@@ -61,13 +61,12 @@ public class Client extends Person {
     public String toString() {
 
         return """
-            Client:{
-                person='%s',
-                placeOfWork='%s',
-                monthlyIncome='%.2f',
-                bank='%s',
-                creditRating='%.2f'
-            }
+            Client:
+                person = '%s',
+                placeOfWork = '%s',
+                monthlyIncome = '%.2f',
+                bank = '%s',
+                creditRating = '%.2f'
             """.formatted(super.toString(), getWorkPlace(), getMonthlyIncome(), getBank().getName(), getCreditRating());
     }
 

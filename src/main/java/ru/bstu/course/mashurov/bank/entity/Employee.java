@@ -57,15 +57,14 @@ public class Employee extends Person {
     public String toString() {
 
         return """
-            Employee:{
-                person='%s',
-                job='%s',
-                bank='%s',
-                isWorkingFromHome='%s',
-                bankOffice='%s',
-                isCreditAvailable='%s',
-                salary='%.2f'
-            }
+            Employee:
+                person = '%s',
+                job = '%s',
+                bank = '%s',
+                isWorkingFromHome = '%s',
+                bankOffice = '%s',
+                isCreditAvailable = '%s',
+                salary = '%.2f'
         """.formatted(
             super.toString(), getJob(), getBank().getName(), isWorkingFromHome(),
             getBankOffice(), isCreditAvailable(), getSalary()

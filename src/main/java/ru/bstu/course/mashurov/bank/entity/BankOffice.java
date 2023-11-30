@@ -103,20 +103,19 @@ public class BankOffice {
     public String toString() {
 
         return """
-            BankOffice:{
-                id='%s',
-                name='%s',
-                address='%s',
-                bank='%s',
-                isWorking='%s',
-                isAtmPlaceable='%s',
-                atmCount='%s',
-                isCreditAvailable='%s',
-                isCashWithdrawalAvailable='%s',
-                isCashDepositAvailable='%s',
-                totalMoney='%.2f',
-                rentPrice='%.2f'
-            }
+            BankOffice:
+                id = '%s',
+                name = '%s',
+                address = '%s',
+                bank = '%s',
+                isWorking = '%s',
+                isAtmPlaceable = '%s',
+                atmCount = '%s',
+                isCreditAvailable = '%s',
+                isCashWithdrawalAvailable = '%s',
+                isCashDepositAvailable = '%s',
+                totalMoney = '%.2f',
+                rentPrice = '%.2f'
             """
             .formatted(
                 getId(), getName(), getAddress(), getBank().getName(), isWorking(), isAtmPlaceable(),

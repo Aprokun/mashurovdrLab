@@ -115,19 +115,18 @@ public class BankAtm {
     public String toString() {
 
         return """
-            BankAtm:{
-                id='%s',
-                name='%s',
-                address='%s',
-                status='%s',
-                bank='%s',
-                bankOffice='%s',
-                employee='%s',
-                isCashWithdrawalAvailable='%s',
-                isCashDepositAvailable='%s',
-                totalMoney='%.2f',
-                maintenanceCost='%.2f'
-            }
+            BankAtm:
+                id = '%s',
+                name = '%s',
+                address = '%s',
+                status = '%s',
+                bank = '%s',
+                bankOffice = '%s',
+                employee = '%s',
+                isCashWithdrawalAvailable = '%s',
+                isCashDepositAvailable = '%s',
+                totalMoney = '%.2f',
+                maintenanceCost = '%.2f'
             """
             .formatted(
                 getId(), getName(), getAddress(), getStatus(), getBank().getName(), getBankOffice(),
