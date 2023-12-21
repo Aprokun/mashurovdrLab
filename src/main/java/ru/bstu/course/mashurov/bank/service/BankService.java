@@ -32,7 +32,7 @@ public interface BankService extends Crud<Bank>, Datable {
 
     boolean withdrawMoney(int id, BigDecimal amount);
 
-    boolean approveCredit(Bank bank, CreditAccount account, Employee employee);
+    boolean approveCredit(Bank bank, CreditAccount account, Employee employee) throws Exception;
 
     List<Bank> getBanksSuitable(BigDecimal sum, int countMonth) throws Exception;
 

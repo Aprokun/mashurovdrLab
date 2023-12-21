@@ -10,6 +10,7 @@ import ru.bstu.course.mashurov.bank.service.BankService;
 import ru.bstu.course.mashurov.bank.service.ClientService;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.*;
 
 public class ClientServiceImpl implements ClientService {
@@ -52,7 +53,7 @@ public class ClientServiceImpl implements ClientService {
                 .between(new BigDecimal("0.0"), new BigDecimal("1.0"))
                 .multiply(Constants.MAX_MONTHLY_INCOME);
 
-        createdClient.setMonthlyIncome(monthlyIncome);
+        createdClient.setMonthlyIncome(createdClient.getMonthlyIncome());
 
         calculateCreditRating(createdClient);
 
@@ -77,7 +78,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public boolean addPaymentAccount(int id, PaymentAccount account) {
 
-        Client client = clients.get(id);
+        Client client = findById(id);
 
         if (client != null) {
 
@@ -93,7 +94,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public boolean addCreditAccount(int id, CreditAccount account) {
 
-        Client client = clients.get(id);
+        Client client = findById(id);
 
         if (client != null) {
 
@@ -120,7 +121,9 @@ public class ClientServiceImpl implements ClientService {
     public BigDecimal calculateCreditRating(Client client) {
 
         client.setCreditRating(
-            client.getMonthlyIncome().divide(new BigDecimal("1000").multiply(new BigDecimal("100")))
+            client
+                    .getMonthlyIncome()
+                    .divide(new BigDecimal("10", MathContext.DECIMAL128).multiply(new BigDecimal("100")))
         );
 
         return client.getCreditRating();
